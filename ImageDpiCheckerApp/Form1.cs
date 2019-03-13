@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace ImageDpiCheckerApp
 {
-    public partial class DpiChecker : Form
+    public partial class ImageChecker : Form
     {
-        public DpiChecker()
+        public string[] filters;
+
+        public ImageChecker()
         {
             InitializeComponent();
             bScanFolder.Enabled = false;
@@ -28,13 +31,22 @@ namespace ImageDpiCheckerApp
 
         private void CheckEnableScanButton()
         {
-            if (filterListBox.CheckedItems.Count > 0 && selectedFolder.Text != string.Empty)
+            if (filterListBox.CheckedItems.Count > 0 && selectedFolder.Text != string.Empty && numTargetDPI.Value > 0)
             {
                 bScanFolder.Enabled = true;
             } else
             {
                 bScanFolder.Enabled = false;
             }
+        }
+
+        private void bScanFolder_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void numTargetDPI_ValueChanged(object sender, EventArgs e)
+        {
+            CheckEnableScanButton();
         }
     }
 }
