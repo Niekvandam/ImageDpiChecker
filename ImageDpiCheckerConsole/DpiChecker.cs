@@ -14,6 +14,7 @@ namespace ImageDpiChecker
 
         static void Main(string[] args)
         {
+            Console.WriteLine("test");
             InitializeProgram(args);
         }
 
