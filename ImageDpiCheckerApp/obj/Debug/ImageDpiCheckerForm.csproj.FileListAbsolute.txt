@@ -1,7 +1,7 @@
 C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiCheckerApp\bin\Debug\ImageDpiCheckerApp.exe.config
 C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiCheckerApp\bin\Debug\ImageDpiCheckerApp.exe
 C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiCheckerApp\bin\Debug\ImageDpiCheckerApp.pdb
-C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiCheckerApp\obj\Debug\ImageDpiCheckerForm.csprojAssemblyReference.cache
+C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiCheckerApp\obj\Debug\ImageDpiCheckerApp.Form1.resources
 C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiCheckerApp\obj\Debug\ImageDpiCheckerApp.Properties.Resources.resources
 C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiCheckerApp\obj\Debug\ImageDpiCheckerForm.csproj.GenerateResource.cache
 C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiCheckerApp\obj\Debug\ImageDpiCheckerForm.csproj.CoreCompileInputs.cache
