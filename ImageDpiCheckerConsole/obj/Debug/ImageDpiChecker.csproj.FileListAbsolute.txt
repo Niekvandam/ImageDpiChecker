@@ -1,0 +1,14 @@
+C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiChecker\bin\Debug\ImageDpiChecker.exe.config
+C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiChecker\bin\Debug\ImageDpiChecker.exe.manifest
+C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiChecker\bin\Debug\ImageDpiChecker.application
+C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiChecker\bin\Debug\ImageDpiChecker.exe
+C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiChecker\bin\Debug\ImageDpiChecker.pdb
+C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiChecker\obj\Debug\ImageDpiChecker.csprojAssemblyReference.cache
+C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiChecker\obj\Debug\ImageDpiChecker.csproj.CoreCompileInputs.cache
+C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiChecker\obj\Debug\ImageDpiChecker.exe.manifest
+C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiChecker\obj\Debug\ImageDpiChecker.application
+C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiChecker\obj\Debug\ImageDpiChecker.exe
+C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiChecker\obj\Debug\ImageDpiChecker.pdb
+C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiChecker\bin\Debug\itextsharp.dll
+C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiChecker\bin\Debug\itextsharp.xml
+C:\Users\Niek\source\repos\ImageDpiChecker\ImageDpiChecker\obj\Debug\ImageDpiChecker.csproj.CopyComplete
