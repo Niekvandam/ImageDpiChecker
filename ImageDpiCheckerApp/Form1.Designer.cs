@@ -1,6 +1,6 @@
 ﻿namespace ImageDpiCheckerApp
 {
-    partial class ImageChecker
+    partial class DpiChecker
     {
         /// <summary>
         /// Required designer variable.
@@ -38,10 +38,7 @@
             this.isImage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fileType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bScanFolder = new System.Windows.Forms.Button();
-            this.numTargetDPI = new System.Windows.Forms.NumericUpDown();
-            this.targetDPILabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numTargetDPI)).BeginInit();
             this.SuspendLayout();
             // 
             // bOpenFolder
@@ -134,32 +131,12 @@
             this.bScanFolder.TabIndex = 5;
             this.bScanFolder.Text = "Scan Folder";
             this.bScanFolder.UseVisualStyleBackColor = true;
-            this.bScanFolder.Click += new System.EventHandler(this.bScanFolder_Click);
             // 
-            // numTargetDPI
-            // 
-            this.numTargetDPI.Location = new System.Drawing.Point(12, 97);
-            this.numTargetDPI.Name = "numTargetDPI";
-            this.numTargetDPI.Size = new System.Drawing.Size(75, 20);
-            this.numTargetDPI.TabIndex = 6;
-            this.numTargetDPI.ValueChanged += new System.EventHandler(this.numTargetDPI_ValueChanged);
-            // 
-            // targetDPILabel
-            // 
-            this.targetDPILabel.AutoSize = true;
-            this.targetDPILabel.Location = new System.Drawing.Point(12, 78);
-            this.targetDPILabel.Name = "targetDPILabel";
-            this.targetDPILabel.Size = new System.Drawing.Size(59, 13);
-            this.targetDPILabel.TabIndex = 7;
-            this.targetDPILabel.Text = "Target DPI";
-            // 
-            // ImageChecker
+            // DpiChecker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(457, 355);
-            this.Controls.Add(this.targetDPILabel);
-            this.Controls.Add(this.numTargetDPI);
             this.Controls.Add(this.bScanFolder);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.filterLabel);
@@ -167,10 +144,9 @@
             this.Controls.Add(this.selectedFolder);
             this.Controls.Add(this.bOpenFolder);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Name = "ImageChecker";
+            this.Name = "DpiChecker";
             this.Text = "DpiChecker";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numTargetDPI)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -188,8 +164,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn isImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn fileType;
         private System.Windows.Forms.Button bScanFolder;
-        private System.Windows.Forms.NumericUpDown numTargetDPI;
-        private System.Windows.Forms.Label targetDPILabel;
     }
 }
 
