@@ -1,6 +1,7 @@
 ﻿using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 
@@ -9,12 +10,12 @@ namespace ImageDpiCheckerApp
    public class ImageChecker
    {
 
-        public static List<Tuple<string,string, string, bool>> storedFiles = new List<Tuple<string, string, string, bool>>();
+        public List<Tuple<string,string, string, bool, string>> storedFiles = new List<Tuple<string, string, string, bool, string>>();
 
-        public static string targetDirectory;
+        public string targetDirectory;
 
 
-        public static List<Tuple<string, string, string, bool>> GetFilteredFiles(string directoryToScan, List<string> filters)
+        public List<Tuple<string, string, string, bool, string>> GetFilteredFiles(string directoryToScan, List<string> filters)
         {
             targetDirectory = directoryToScan;
 
@@ -24,14 +25,14 @@ namespace ImageDpiCheckerApp
         }
 
 
-        public static List<Tuple<string,string,  string, bool>> LoopThroughFiles(string[] filteredFiles)
+        public List<Tuple<string,string,  string, bool, string>> LoopThroughFiles(string[] filteredFiles)
         {
             bool hasException = false;
             foreach (var fileLoc in filteredFiles)
             {
                 try
                 {
-                    Tuple<string, string, string, bool> currentImage = null;
+                    Tuple<string, string, string, bool, string> currentImage = null;
                     string filename = Path.GetFileName(fileLoc);
                     string extension = Path.GetExtension(fileLoc);
                     currentImage = extension == ".pdf" ? GetDPIFromPdf(fileLoc, extension) : GetDPIFromImage(fileLoc, extension);
@@ -48,7 +49,7 @@ namespace ImageDpiCheckerApp
         }
 
 
-        public static String[] GetFilesFrom(String searchFolder, List<string> filters)
+        public String[] GetFilesFrom(String searchFolder, List<string> filters)
         {
             List<String> filesFound = new List<String>();
             try
@@ -67,14 +68,14 @@ namespace ImageDpiCheckerApp
             return filesFound.ToArray();
         }
 
-        public static Tuple<string, string, string, bool> GetDPIFromImage(string fileLoc, string extension)
+        public Tuple<string, string, string, bool, string> GetDPIFromImage(string fileLoc, string extension)
         {
             string filename = FormatFileName(fileLoc);
 
-            return Tuple.Create(filename, extension, Bitmap.FromFile(fileLoc).HorizontalResolution.ToString(), true);
+            return Tuple.Create(filename, extension, Bitmap.FromFile(fileLoc).HorizontalResolution.ToString(), true, "unknown");
         }
 
-        public static Tuple<string, string, string, bool> GetDPIFromPdf(string fileLoc, string extension)
+        public Tuple<string, string, string, bool, string> GetDPIFromPdf(string fileLoc, string extension)
         {
             bool isPicture = false;
             string filename = FormatFileName(fileLoc);
@@ -82,6 +83,7 @@ namespace ImageDpiCheckerApp
             using (var reader = new PdfReader(fileLoc))
             {
                 PdfDictionary pg = reader.GetPageN(1);
+                Debug.WriteLine(reader.Metadata.ToString());
                 PdfDictionary res = (PdfDictionary)PdfReader.GetPdfObject(pg.Get(PdfName.RESOURCES));
                 PdfDictionary xobjs = (PdfDictionary)PdfReader.GetPdfObject(res.Get(PdfName.XOBJECT));
                 iTextSharp.text.Rectangle cropbox = reader.GetCropBox(1);
@@ -103,10 +105,10 @@ namespace ImageDpiCheckerApp
                     }
                 }
             }
-            return Tuple.Create(filename, extension, dpiOfPDF, isPicture);
+            return Tuple.Create(filename, extension, dpiOfPDF, isPicture, "unknown");
         }
 
-        public static string FormatFileName(string fileLoc)
+        public string FormatFileName(string fileLoc)
         {
             string filename = fileLoc.Replace(targetDirectory, "");
             if (filename.Substring(0, 1) == @"\")
