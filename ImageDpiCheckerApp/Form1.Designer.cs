@@ -33,10 +33,6 @@
             this.filterListBox = new System.Windows.Forms.CheckedListBox();
             this.filterLabel = new System.Windows.Forms.Label();
             this.dpiDataGrid = new System.Windows.Forms.DataGridView();
-            this.fileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dpi = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.isImage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fileType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bScanFolder = new System.Windows.Forms.Button();
             this.numTargetDPI = new System.Windows.Forms.NumericUpDown();
             this.targetDPI = new System.Windows.Forms.Label();
@@ -90,41 +86,13 @@
             // 
             this.dpiDataGrid.AllowUserToAddRows = false;
             this.dpiDataGrid.AllowUserToDeleteRows = false;
+            this.dpiDataGrid.AllowUserToResizeRows = false;
             this.dpiDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dpiDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.fileName,
-            this.dpi,
-            this.isImage,
-            this.fileType});
             this.dpiDataGrid.Location = new System.Drawing.Point(12, 152);
             this.dpiDataGrid.Name = "dpiDataGrid";
             this.dpiDataGrid.ReadOnly = true;
             this.dpiDataGrid.Size = new System.Drawing.Size(433, 191);
             this.dpiDataGrid.TabIndex = 4;
-            // 
-            // fileName
-            // 
-            this.fileName.HeaderText = "File Name";
-            this.fileName.Name = "fileName";
-            this.fileName.ReadOnly = true;
-            // 
-            // dpi
-            // 
-            this.dpi.HeaderText = "Dpi";
-            this.dpi.Name = "dpi";
-            this.dpi.ReadOnly = true;
-            // 
-            // isImage
-            // 
-            this.isImage.HeaderText = "Is image";
-            this.isImage.Name = "isImage";
-            this.isImage.ReadOnly = true;
-            // 
-            // fileType
-            // 
-            this.fileType.HeaderText = "File Type";
-            this.fileType.Name = "fileType";
-            this.fileType.ReadOnly = true;
             // 
             // bScanFolder
             // 
@@ -142,7 +110,7 @@
             this.numTargetDPI.Name = "numTargetDPI";
             this.numTargetDPI.Size = new System.Drawing.Size(120, 20);
             this.numTargetDPI.TabIndex = 6;
-            this.numTargetDPI.ValueChanged += new System.EventHandler(this.numTargetDPI_ValueChanged);
+            this.numTargetDPI.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numTargetDPI_KeyPress);
             // 
             // targetDPI
             // 
@@ -183,10 +151,6 @@
         private System.Windows.Forms.CheckedListBox filterListBox;
         private System.Windows.Forms.Label filterLabel;
         private System.Windows.Forms.DataGridView dpiDataGrid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fileName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dpi;
-        private System.Windows.Forms.DataGridViewTextBoxColumn isImage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fileType;
         private System.Windows.Forms.Button bScanFolder;
         private System.Windows.Forms.NumericUpDown numTargetDPI;
         private System.Windows.Forms.Label targetDPI;
