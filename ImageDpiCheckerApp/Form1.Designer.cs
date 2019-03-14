@@ -32,13 +32,16 @@
             this.selectedFolder = new System.Windows.Forms.TextBox();
             this.filterListBox = new System.Windows.Forms.CheckedListBox();
             this.filterLabel = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dpiDataGrid = new System.Windows.Forms.DataGridView();
             this.fileName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dpi = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isImage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.fileType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bScanFolder = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.numTargetDPI = new System.Windows.Forms.NumericUpDown();
+            this.targetDPI = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dpiDataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTargetDPI)).BeginInit();
             this.SuspendLayout();
             // 
             // bOpenFolder
@@ -83,21 +86,21 @@
             this.filterLabel.TabIndex = 3;
             this.filterLabel.Text = "Select file extensions to filter";
             // 
-            // dataGridView1
+            // dpiDataGrid
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dpiDataGrid.AllowUserToAddRows = false;
+            this.dpiDataGrid.AllowUserToDeleteRows = false;
+            this.dpiDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dpiDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.fileName,
             this.dpi,
             this.isImage,
             this.fileType});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 152);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(433, 191);
-            this.dataGridView1.TabIndex = 4;
+            this.dpiDataGrid.Location = new System.Drawing.Point(12, 152);
+            this.dpiDataGrid.Name = "dpiDataGrid";
+            this.dpiDataGrid.ReadOnly = true;
+            this.dpiDataGrid.Size = new System.Drawing.Size(433, 191);
+            this.dpiDataGrid.TabIndex = 4;
             // 
             // fileName
             // 
@@ -131,14 +134,34 @@
             this.bScanFolder.TabIndex = 5;
             this.bScanFolder.Text = "Scan Folder";
             this.bScanFolder.UseVisualStyleBackColor = true;
+            this.bScanFolder.Click += new System.EventHandler(this.bScanFolder_Click);
+            // 
+            // numTargetDPI
+            // 
+            this.numTargetDPI.Location = new System.Drawing.Point(13, 97);
+            this.numTargetDPI.Name = "numTargetDPI";
+            this.numTargetDPI.Size = new System.Drawing.Size(120, 20);
+            this.numTargetDPI.TabIndex = 6;
+            this.numTargetDPI.ValueChanged += new System.EventHandler(this.numTargetDPI_ValueChanged);
+            // 
+            // targetDPI
+            // 
+            this.targetDPI.AutoSize = true;
+            this.targetDPI.Location = new System.Drawing.Point(12, 78);
+            this.targetDPI.Name = "targetDPI";
+            this.targetDPI.Size = new System.Drawing.Size(59, 13);
+            this.targetDPI.TabIndex = 7;
+            this.targetDPI.Text = "Target DPI";
             // 
             // DpiChecker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(457, 355);
+            this.Controls.Add(this.targetDPI);
+            this.Controls.Add(this.numTargetDPI);
             this.Controls.Add(this.bScanFolder);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dpiDataGrid);
             this.Controls.Add(this.filterLabel);
             this.Controls.Add(this.filterListBox);
             this.Controls.Add(this.selectedFolder);
@@ -146,7 +169,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "DpiChecker";
             this.Text = "DpiChecker";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dpiDataGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTargetDPI)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,12 +182,14 @@
         private System.Windows.Forms.TextBox selectedFolder;
         private System.Windows.Forms.CheckedListBox filterListBox;
         private System.Windows.Forms.Label filterLabel;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dpiDataGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn fileName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dpi;
         private System.Windows.Forms.DataGridViewTextBoxColumn isImage;
         private System.Windows.Forms.DataGridViewTextBoxColumn fileType;
         private System.Windows.Forms.Button bScanFolder;
+        private System.Windows.Forms.NumericUpDown numTargetDPI;
+        private System.Windows.Forms.Label targetDPI;
     }
 }
 
