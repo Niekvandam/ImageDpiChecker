@@ -83,7 +83,6 @@ namespace ImageDpiCheckerApp
             using (var reader = new PdfReader(fileLoc))
             {
                 PdfDictionary pg = reader.GetPageN(1);
-                Debug.WriteLine(reader.Metadata.ToString());
                 PdfDictionary res = (PdfDictionary)PdfReader.GetPdfObject(pg.Get(PdfName.RESOURCES));
                 PdfDictionary xobjs = (PdfDictionary)PdfReader.GetPdfObject(res.Get(PdfName.XOBJECT));
                 iTextSharp.text.Rectangle cropbox = reader.GetCropBox(1);

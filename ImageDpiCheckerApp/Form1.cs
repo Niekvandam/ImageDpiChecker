@@ -35,26 +35,18 @@ namespace ImageDpiCheckerApp
             CheckEnableScanButton();
         }
 
-        private void CheckEnableScanButton()
+        private bool CheckEnableScanButton()
         {
             if (filterListBox.CheckedItems.Count > 0 && selectedFolder.Text != string.Empty && Directory.Exists(selectedFolder.Text) && numTargetDPI.Value > 0)
             {
                 bScanFolder.Enabled = true;
+                return true;
             }
             else
             {
                 bScanFolder.Enabled = false;
+                return false;
             }
-        }
-
-        private void bScanFolder_Click(object sender, EventArgs e)
-        {
-            List<string> filters = new List<string>();
-            foreach (object itemChecked in filterListBox.CheckedItems)
-            {
-                filters.Add(itemChecked.ToString());
-            }
-            BindDpiDataGrid(filters);
         }
 
         private void BindDpiDataGrid(List<string> filters)
@@ -95,21 +87,6 @@ namespace ImageDpiCheckerApp
             CheckEnableScanButton();
         }
 
-        /* Als we dubbelklikken op een geselecteerde regel dan openen we dat bestand met behulp van het gekoppelde programma.
-        ** explorer doet dat standaard voor ons dus zetten we het pad en bestandsnaam als parameter achter explorer.exe
-        ** Deze staat standaard in het zoekpad dus doen wat dat lekker quick and dirty */
-        private void dpiDataGrid_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-            string cmd = "explorer.exe";
-            string showFile = Convert.ToString(selectedFolder.Text) + "\\" + Convert.ToString(dpiDataGrid[e.ColumnIndex, e.RowIndex].Value);
-
-            // Console.WriteLine(folder);
-            if (e.ColumnIndex == 0)
-            {
-                Process.Start(cmd, showFile);
-            }
-        }
 
         /// <summary>
         /// Als we handmatig een path invoeren dan controleren we wel even of de map bestaat
@@ -121,6 +98,17 @@ namespace ImageDpiCheckerApp
             CheckEnableScanButton();
         }
 
+        /* Als we dubbelklikken op een geselecteerde regel dan openen we dat bestand met behulp van het gekoppelde programma.
+        ** explorer doet dat standaard voor ons dus zetten we het pad en bestandsnaam als parameter achter explorer.exe
+        ** Deze staat standaard in het zoekpad dus doen wat dat lekker quick and dirty */
+        private void dpiDataGrid_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+                OpenExplorer(Convert.ToString(selectedFolder.Text) + "\\" + Convert.ToString(dpiDataGrid[e.ColumnIndex, e.RowIndex].Value));
+            }
+        }
+
         /// <summary>
         /// Als we dubbelklikken op de getoonde directorie openen we de directory in de explere
         /// </summary>
@@ -128,11 +116,7 @@ namespace ImageDpiCheckerApp
         /// <param name="e"></param>
         private void hrefToFolder_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            string cmd = "explorer.exe";
-            string showFolder = Convert.ToString(selectedFolder.Text);
-
-            // Console.WriteLine(folder);
-            Process.Start(cmd, showFolder);
+            OpenExplorer(Convert.ToString(selectedFolder.Text));
         }
 
         private void ignoreDpi_CheckedChanged(object sender, EventArgs e)
@@ -148,6 +132,22 @@ namespace ImageDpiCheckerApp
                 checkDpi = true;
                 numTargetDPI.Enabled = true;
             }
+        }
+
+        private void bScanFolder_Click(object sender, EventArgs e)
+        {
+            List<string> filters = new List<string>();
+            foreach (object itemChecked in filterListBox.CheckedItems)
+            {
+                filters.Add(itemChecked.ToString());
+            }
+            BindDpiDataGrid(filters);
+        }
+
+        public void OpenExplorer(string targetPath)
+        {
+            string cmd = "explorer.exe";
+            Process.Start(cmd, targetPath);
         }
     }
 }
