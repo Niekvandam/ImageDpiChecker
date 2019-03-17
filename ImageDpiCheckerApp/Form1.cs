@@ -58,8 +58,9 @@ namespace ImageDpiCheckerApp
             dpiDataGrid.Rows.Clear();
             dpiDataGrid.Refresh();
             var filteredFiles = new List<Tuple<string, string, string, bool, string>>();
+            var allFiles = new List<Tuple<string, string, string, bool, string>>();
 
-            Parallel.Invoke(() => { var allFiles = ch.GetFilteredFiles(selectedFolder.Text, filters); });
+            //Parallel.Invoke(() => { allFiles = ch.GetFilteredFiles(selectedFolder.Text, filters); });
             foreach (var loopedFiles in ch.GetFilteredFiles(selectedFolder.Text, filters))
             {
                 if (checkDpi)

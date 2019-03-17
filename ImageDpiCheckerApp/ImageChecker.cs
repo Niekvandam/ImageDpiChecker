@@ -77,7 +77,7 @@ namespace ImageDpiCheckerApp
                 }
                 foreach (var file in Directory.GetFiles(searchFolder))
                 {
-                    if (file.Contains(currentFilter))
+                     if (file.ToLower().EndsWith(currentFilter.ToLower()))
                         filesFound.Add(file);
                 }
             }
