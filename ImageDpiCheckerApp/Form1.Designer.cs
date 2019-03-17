@@ -143,7 +143,7 @@
             this.hrefToFolder.Name = "hrefToFolder";
             this.hrefToFolder.Size = new System.Drawing.Size(0, 13);
             this.hrefToFolder.TabIndex = 9;
-            this.hrefToFolder.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.hrefToFolder_MouseDoubleClick);
+            this.hrefToFolder.MouseClick += new System.Windows.Forms.MouseEventHandler(this.hrefToFolder_MouseClick);
             // 
             // label1
             // 

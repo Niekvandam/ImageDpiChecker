@@ -109,16 +109,6 @@ namespace ImageDpiCheckerApp
             }
         }
 
-        /// <summary>
-        /// Als we dubbelklikken op de getoonde directorie openen we de directory in de explere
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void hrefToFolder_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            OpenExplorer(Convert.ToString(selectedFolder.Text));
-        }
-
         private void ignoreDpi_CheckedChanged(object sender, EventArgs e)
         {
             var checkbox = sender as CheckBox;
@@ -148,6 +138,11 @@ namespace ImageDpiCheckerApp
         {
             string cmd = "explorer.exe";
             Process.Start(cmd, targetPath);
+        }
+
+        private void hrefToFolder_MouseClick(object sender, MouseEventArgs e)
+        {
+            OpenExplorer(Convert.ToString(selectedFolder.Text));
         }
     }
 }
