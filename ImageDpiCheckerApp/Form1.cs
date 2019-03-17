@@ -60,7 +60,6 @@ namespace ImageDpiCheckerApp
             var filteredFiles = new List<Tuple<string, string, string, bool, string>>();
             var allFiles = new List<Tuple<string, string, string, bool, string>>();
 
-            //Parallel.Invoke(() => { allFiles = ch.GetFilteredFiles(selectedFolder.Text, filters); });
             foreach (var loopedFiles in ch.GetFilteredFiles(selectedFolder.Text, filters))
             {
                 if (checkDpi)
