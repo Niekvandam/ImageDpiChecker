@@ -35,7 +35,7 @@ namespace ImageDpiCheckerApp
 
         private void CheckEnableScanButton()
         {
-            if (filterListBox.CheckedItems.Count > 0 && selectedFolder.Text != string.Empty && numTargetDPI.Value > 0)
+            if (filterListBox.CheckedItems.Count > 0 && selectedFolder.Text != string.Empty && Directory.Exists(selectedFolder.Text) && numTargetDPI.Value > 0)
             {
                 bScanFolder.Enabled = true;
             }
@@ -87,14 +87,25 @@ namespace ImageDpiCheckerApp
             CheckEnableScanButton();
         }
 
+        /* Als we dubbelklikken op een geselecteerde regel dan openen we dat bestand met behulp van het gekoppelde programma.
+        ** explorer doet dat standaard voor ons dus zetten we het pad en bestandsnaam als parameter achter explorer.exe
+        ** Deze staat standaard in het zoekpad dus doen wat dat lekker quick and dirty */
         private void dpiDataGrid_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+           
             string cmd = "explorer.exe";
-            string folder = Path.GetDirectoryName(selectedFolder.Text + "\\" + dpiDataGrid[e.ColumnIndex, e.RowIndex].Value);
+            string ShowFolder = Convert.ToString(selectedFolder.Text) + "\\" + Convert.ToString(dpiDataGrid[e.ColumnIndex, e.RowIndex].Value);
+                       
+           // Console.WriteLine(folder);
             if (e.ColumnIndex == 0)
             {
-                Process.Start(cmd, folder);
+                Process.Start(cmd, ShowFolder);
             }
+        }
+
+        private void selectedFolder_TextChanged(object sender, EventArgs e)
+        {
+           CheckEnableScanButton();
         }
     }
 }

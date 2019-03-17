@@ -54,11 +54,12 @@
             // 
             // selectedFolder
             // 
+            this.selectedFolder.AcceptsReturn = true;
             this.selectedFolder.Location = new System.Drawing.Point(12, 51);
             this.selectedFolder.Name = "selectedFolder";
-            this.selectedFolder.ReadOnly = true;
             this.selectedFolder.Size = new System.Drawing.Size(265, 20);
             this.selectedFolder.TabIndex = 1;
+            this.selectedFolder.TextChanged += new System.EventHandler(this.selectedFolder_TextChanged);
             // 
             // filterListBox
             // 
