@@ -7,10 +7,10 @@ using System.IO;
 
 namespace ImageDpiCheckerApp
 {
-   public class ImageChecker
-   {
+    public class ImageChecker
+    {
 
-        public List<Tuple<string,string, string, bool, string>> storedFiles = new List<Tuple<string, string, string, bool, string>>();
+        public List<Tuple<string, string, string, bool, string>> storedFiles = new List<Tuple<string, string, string, bool, string>>();
 
         public string targetDirectory;
 
@@ -25,7 +25,7 @@ namespace ImageDpiCheckerApp
         }
 
 
-        public List<Tuple<string,string,  string, bool, string>> LoopThroughFiles(string[] filteredFiles)
+        public List<Tuple<string, string, string, bool, string>> LoopThroughFiles(string[] filteredFiles)
         {
             bool hasException = false;
             foreach (var fileLoc in filteredFiles)
@@ -44,28 +44,31 @@ namespace ImageDpiCheckerApp
                 }
             }
             if (hasException)
+            {
+
+
                 Console.WriteLine("An unexpected error has occurred and one or more DPI's could not be read");
+            }
             return storedFiles;
         }
 
-
         public String[] GetFilesFrom(String searchFolder, List<string> filters)
         {
+
             List<String> filesFound = new List<String>();
             try
             {
-
                 foreach (var filter in filters)
                 {
                     filesFound.AddRange(Directory.GetFiles(searchFolder, String.Format("*.{0}", filter), SearchOption.AllDirectories));
                 }
-
             }
             catch (Exception e)
             {
                 Console.WriteLine("The given file path could not be found");
             }
             return filesFound.ToArray();
+
         }
 
         public Tuple<string, string, string, bool, string> GetDPIFromImage(string fileLoc, string extension)

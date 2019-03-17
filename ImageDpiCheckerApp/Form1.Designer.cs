@@ -1,4 +1,6 @@
-﻿namespace ImageDpiCheckerApp
+﻿using System;
+
+namespace ImageDpiCheckerApp
 {
     partial class DpiChecker
     {
@@ -42,9 +44,11 @@
             this.ignoreDpi = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.labelException = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dpiDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTargetDPI)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // bOpenFolder
@@ -97,7 +101,7 @@
             this.dpiDataGrid.AllowUserToResizeRows = false;
             this.dpiDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dpiDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dpiDataGrid.Location = new System.Drawing.Point(16, 169);
+            this.dpiDataGrid.Location = new System.Drawing.Point(6, 19);
             this.dpiDataGrid.Name = "dpiDataGrid";
             this.dpiDataGrid.ReadOnly = true;
             this.dpiDataGrid.Size = new System.Drawing.Size(505, 212);
@@ -156,7 +160,6 @@
             this.label1.Size = new System.Drawing.Size(74, 13);
             this.label1.TabIndex = 10;
             this.label1.Text = "Folder to scan";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // ignoreDpi
             // 
@@ -185,16 +188,29 @@
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Scan Folder Parameter Selection";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.labelException);
+            this.groupBox2.Controls.Add(this.dpiDataGrid);
             this.groupBox2.Location = new System.Drawing.Point(12, 147);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(516, 244);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Results";
+            // 
+            // labelException
+            // 
+            this.labelException.AutoSize = true;
+            this.labelException.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.labelException.ForeColor = System.Drawing.Color.DarkRed;
+            this.labelException.Location = new System.Drawing.Point(83, 107);
+            this.labelException.Name = "labelException";
+            this.labelException.Size = new System.Drawing.Size(368, 15);
+            this.labelException.TabIndex = 14;
+            this.labelException.Text = "ERROR IN SEARCH - COULD NOT FILL ARRAY DUE TO RIGHTS ISSUE";
+            this.labelException.Visible = false;
             // 
             // DpiChecker
             // 
@@ -204,21 +220,23 @@
             this.Controls.Add(this.hrefToFolder);
             this.Controls.Add(this.amountFilesFound);
             this.Controls.Add(this.bScanFolder);
-            this.Controls.Add(this.dpiDataGrid);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "DpiChecker";
             this.Text = "DpiChecker";
-            this.Load += new System.EventHandler(this.DpiChecker_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dpiDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTargetDPI)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
+
+ 
 
         #endregion
 
@@ -236,6 +254,7 @@
         private System.Windows.Forms.CheckBox ignoreDpi;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label labelException;
     }
 }
 

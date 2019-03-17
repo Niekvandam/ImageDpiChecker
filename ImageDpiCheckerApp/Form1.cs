@@ -18,6 +18,7 @@ namespace ImageDpiCheckerApp
             bScanFolder.Enabled = false;
             numTargetDPI.Maximum = decimal.MaxValue;
             numTargetDPI.Value = 300;
+            labelException.Visible = false;
             filterListBox.SetItemChecked(0, true);
         }
 
@@ -57,6 +58,7 @@ namespace ImageDpiCheckerApp
             dpiDataGrid.Rows.Clear();
             dpiDataGrid.Refresh();
             var filteredFiles = new List<Tuple<string, string, string, bool, string>>();
+
             Parallel.Invoke(() => { var allFiles = ch.GetFilteredFiles(selectedFolder.Text, filters); });
             foreach (var loopedFiles in ch.GetFilteredFiles(selectedFolder.Text, filters))
             {
@@ -149,19 +151,5 @@ namespace ImageDpiCheckerApp
             OpenExplorer(Convert.ToString(selectedFolder.Text));
         }
 
-        private void DpiChecker_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
     }
 }
