@@ -45,10 +45,12 @@ namespace ImageDpiCheckerApp
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.labelException = new System.Windows.Forms.Label();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
             ((System.ComponentModel.ISupportInitialize)(this.dpiDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTargetDPI)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // bOpenFolder
@@ -212,6 +214,11 @@ namespace ImageDpiCheckerApp
             this.labelException.Text = "ERROR IN SEARCH - COULD NOT FILL ARRAY DUE TO RIGHTS ISSUE";
             this.labelException.Visible = false;
             // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            // 
             // DpiChecker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -231,6 +238,7 @@ namespace ImageDpiCheckerApp
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -255,6 +263,7 @@ namespace ImageDpiCheckerApp
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label labelException;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
     }
 }
 

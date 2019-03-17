@@ -150,6 +150,5 @@ namespace ImageDpiCheckerApp
         {
             OpenExplorer(Convert.ToString(selectedFolder.Text));
         }
-
     }
 }

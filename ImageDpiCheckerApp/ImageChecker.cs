@@ -1,7 +1,6 @@
 ﻿using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 
@@ -14,6 +13,9 @@ namespace ImageDpiCheckerApp
 
         public string targetDirectory;
 
+        public string currentFilter;
+
+        public List<String> filesFound = new List<String>();
 
         public List<Tuple<string, string, string, bool, string>> GetFilteredFiles(string directoryToScan, List<string> filters)
         {
@@ -25,7 +27,7 @@ namespace ImageDpiCheckerApp
         }
 
 
-        public List<Tuple<string, string, string, bool, string>> LoopThroughFiles(string[] filteredFiles)
+        public List<Tuple<string, string, string, bool, string>> LoopThroughFiles(List<string> filteredFiles)
         {
             bool hasException = false;
             foreach (var fileLoc in filteredFiles)
@@ -52,20 +54,36 @@ namespace ImageDpiCheckerApp
             return storedFiles;
         }
 
-        public String[] GetFilesFrom(String searchFolder, List<string> filters)
+        public List<String> GetFilesFrom(string searchFolder, List<string> filters)
         {
 
-            List<String> filesFound = new List<String>();
+
+            foreach (string filter in filters)
+            {
+                currentFilter = filter;
+                GetFilesRecursive(searchFolder);
+            }
+
+            return filesFound;
+        }
+
+        public String[] GetFilesRecursive(String searchFolder)
+        {
             try
             {
-                foreach (var filter in filters)
+                foreach (string d in Directory.GetDirectories(searchFolder))
                 {
-                    filesFound.AddRange(Directory.GetFiles(searchFolder, String.Format("*.{0}", filter), SearchOption.AllDirectories));
+                    GetFilesRecursive(d);
+                }
+                foreach (var file in Directory.GetFiles(searchFolder))
+                {
+                    if (file.Contains(currentFilter))
+                        filesFound.Add(file);
                 }
             }
-            catch (Exception e)
+            catch (System.Exception e)
             {
-                Console.WriteLine("The given file path could not be found");
+
             }
             return filesFound.ToArray();
 
