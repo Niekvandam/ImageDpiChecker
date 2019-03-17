@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -9,7 +10,7 @@ namespace ImageDpiCheckerApp
 {
     public partial class DpiChecker : Form
     {
-        public bool checkDpi;
+        public bool checkDpi = true;
 
         public DpiChecker()
         {
@@ -116,11 +117,14 @@ namespace ImageDpiCheckerApp
             {
                 checkDpi = false;
                 numTargetDPI.Enabled = false;
+                targetDPI.ForeColor = Color.Gray;
+
             }
             else
             {
                 checkDpi = true;
                 numTargetDPI.Enabled = true;
+                targetDPI.ForeColor = Color.Black;
             }
         }
 
@@ -143,6 +147,21 @@ namespace ImageDpiCheckerApp
         private void hrefToFolder_MouseClick(object sender, MouseEventArgs e)
         {
             OpenExplorer(Convert.ToString(selectedFolder.Text));
+        }
+
+        private void DpiChecker_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }
