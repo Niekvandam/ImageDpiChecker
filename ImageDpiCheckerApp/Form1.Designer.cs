@@ -38,13 +38,15 @@
             this.targetDPI = new System.Windows.Forms.Label();
             this.amountFilesFound = new System.Windows.Forms.Label();
             this.hrefToFolder = new System.Windows.Forms.LinkLabel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.ignoreDpi = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dpiDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTargetDPI)).BeginInit();
             this.SuspendLayout();
             // 
             // bOpenFolder
             // 
-            this.bOpenFolder.Location = new System.Drawing.Point(236, 7);
+            this.bOpenFolder.Location = new System.Drawing.Point(250, 25);
             this.bOpenFolder.Name = "bOpenFolder";
             this.bOpenFolder.Size = new System.Drawing.Size(75, 23);
             this.bOpenFolder.TabIndex = 0;
@@ -55,7 +57,7 @@
             // selectedFolder
             // 
             this.selectedFolder.AcceptsReturn = true;
-            this.selectedFolder.Location = new System.Drawing.Point(12, 7);
+            this.selectedFolder.Location = new System.Drawing.Point(12, 25);
             this.selectedFolder.Name = "selectedFolder";
             this.selectedFolder.Size = new System.Drawing.Size(218, 20);
             this.selectedFolder.TabIndex = 1;
@@ -70,7 +72,7 @@
             "Tiff",
             "Jpg",
             "Png"});
-            this.filterListBox.Location = new System.Drawing.Point(536, 25);
+            this.filterListBox.Location = new System.Drawing.Point(384, 25);
             this.filterListBox.Name = "filterListBox";
             this.filterListBox.Size = new System.Drawing.Size(137, 64);
             this.filterListBox.TabIndex = 2;
@@ -79,7 +81,7 @@
             // filterLabel
             // 
             this.filterLabel.AutoSize = true;
-            this.filterLabel.Location = new System.Drawing.Point(533, 9);
+            this.filterLabel.Location = new System.Drawing.Point(381, 9);
             this.filterLabel.Name = "filterLabel";
             this.filterLabel.Size = new System.Drawing.Size(140, 13);
             this.filterLabel.TabIndex = 3;
@@ -111,7 +113,7 @@
             // 
             // numTargetDPI
             // 
-            this.numTargetDPI.Location = new System.Drawing.Point(191, 40);
+            this.numTargetDPI.Location = new System.Drawing.Point(12, 77);
             this.numTargetDPI.Name = "numTargetDPI";
             this.numTargetDPI.Size = new System.Drawing.Size(120, 20);
             this.numTargetDPI.TabIndex = 6;
@@ -120,7 +122,7 @@
             // targetDPI
             // 
             this.targetDPI.AutoSize = true;
-            this.targetDPI.Location = new System.Drawing.Point(77, 42);
+            this.targetDPI.Location = new System.Drawing.Point(13, 61);
             this.targetDPI.Name = "targetDPI";
             this.targetDPI.Size = new System.Drawing.Size(108, 13);
             this.targetDPI.TabIndex = 7;
@@ -137,17 +139,39 @@
             // hrefToFolder
             // 
             this.hrefToFolder.AutoSize = true;
-            this.hrefToFolder.Location = new System.Drawing.Point(277, 128);
+            this.hrefToFolder.Location = new System.Drawing.Point(264, 128);
             this.hrefToFolder.Name = "hrefToFolder";
             this.hrefToFolder.Size = new System.Drawing.Size(0, 13);
             this.hrefToFolder.TabIndex = 9;
             this.hrefToFolder.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.hrefToFolder_MouseDoubleClick);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(74, 13);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Folder to scan";
+            // 
+            // ignoreDpi
+            // 
+            this.ignoreDpi.AutoSize = true;
+            this.ignoreDpi.Location = new System.Drawing.Point(157, 79);
+            this.ignoreDpi.Name = "ignoreDpi";
+            this.ignoreDpi.Size = new System.Drawing.Size(107, 17);
+            this.ignoreDpi.TabIndex = 11;
+            this.ignoreDpi.Text = "Ignore target DPI";
+            this.ignoreDpi.UseVisualStyleBackColor = true;
+            this.ignoreDpi.CheckedChanged += new System.EventHandler(this.ignoreDpi_CheckedChanged);
+            // 
             // DpiChecker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 376);
+            this.ClientSize = new System.Drawing.Size(537, 376);
+            this.Controls.Add(this.ignoreDpi);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.hrefToFolder);
             this.Controls.Add(this.amountFilesFound);
             this.Controls.Add(this.targetDPI);
@@ -180,6 +204,8 @@
         private System.Windows.Forms.Label targetDPI;
         private System.Windows.Forms.Label amountFilesFound;
         private System.Windows.Forms.LinkLabel hrefToFolder;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox ignoreDpi;
     }
 }
 

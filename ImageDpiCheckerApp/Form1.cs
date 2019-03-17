@@ -9,6 +9,8 @@ namespace ImageDpiCheckerApp
 {
     public partial class DpiChecker : Form
     {
+        public bool checkDpi;
+
         public DpiChecker()
         {
             InitializeComponent();
@@ -65,11 +67,18 @@ namespace ImageDpiCheckerApp
             Parallel.Invoke(() => { var allFiles = ch.GetFilteredFiles(selectedFolder.Text, filters); });
             foreach (var loopedFiles in ch.GetFilteredFiles(selectedFolder.Text, filters))
             {
-                if(Int32.TryParse(loopedFiles.Item3, out int convertedDpi))
-                    if (convertedDpi < Convert.ToDouble(numTargetDPI.Value))
-                    {
-                        filteredFiles.Add(loopedFiles);
-                    }
+                if (checkDpi)
+                {
+                    if (Int32.TryParse(loopedFiles.Item3, out int convertedDpi))
+                        if (convertedDpi < Convert.ToDouble(numTargetDPI.Value))
+                        {
+                            filteredFiles.Add(loopedFiles);
+                        }
+                }
+                else
+                {
+                    filteredFiles.Add(loopedFiles);
+                }
             }
             dpiDataGrid.DataSource = filteredFiles;
             dpiDataGrid.Columns[0].HeaderText = "File Path";
@@ -79,7 +88,6 @@ namespace ImageDpiCheckerApp
             dpiDataGrid.Columns[4].HeaderText = "Scanner";
             amountFilesFound.Text = String.Format("Found {0} files in :", filteredFiles.Count, selectedFolder.Text);
             hrefToFolder.Text = selectedFolder.Text;
-
         }
 
         private void numTargetDPI_KeyPress(object sender, KeyPressEventArgs e)
@@ -92,25 +100,25 @@ namespace ImageDpiCheckerApp
         ** Deze staat standaard in het zoekpad dus doen wat dat lekker quick and dirty */
         private void dpiDataGrid_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-           
+
             string cmd = "explorer.exe";
             string showFile = Convert.ToString(selectedFolder.Text) + "\\" + Convert.ToString(dpiDataGrid[e.ColumnIndex, e.RowIndex].Value);
-                       
-           // Console.WriteLine(folder);
+
+            // Console.WriteLine(folder);
             if (e.ColumnIndex == 0)
             {
-                Process.Start(cmd, ShowFile);
+                Process.Start(cmd, showFile);
             }
         }
 
-       /// <summary>
-       /// Als we handmatig een path invoeren dan controleren we wel even of de map bestaat
-       /// </summary>
-       /// <param name="sender"></param>
-       /// <param name="e"></param>
+        /// <summary>
+        /// Als we handmatig een path invoeren dan controleren we wel even of de map bestaat
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void selectedFolder_TextChanged(object sender, EventArgs e)
         {
-           CheckEnableScanButton();
+            CheckEnableScanButton();
         }
 
         /// <summary>
@@ -121,12 +129,24 @@ namespace ImageDpiCheckerApp
         private void hrefToFolder_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             string cmd = "explorer.exe";
-            string showFolder = Convert.ToString(selectedFolder.Text); 
+            string showFolder = Convert.ToString(selectedFolder.Text);
 
             // Console.WriteLine(folder);
-            if (e.ColumnIndex == 0)
+            Process.Start(cmd, showFolder);
+        }
+
+        private void ignoreDpi_CheckedChanged(object sender, EventArgs e)
+        {
+            var checkbox = sender as CheckBox;
+            if (checkbox.Checked)
             {
-                Process.Start(cmd, ShowFolder);
+                checkDpi = false;
+                numTargetDPI.Enabled = false;
+            }
+            else
+            {
+                checkDpi = true;
+                numTargetDPI.Enabled = true;
             }
         }
     }
