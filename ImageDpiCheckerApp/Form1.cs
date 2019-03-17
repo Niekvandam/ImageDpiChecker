@@ -94,18 +94,40 @@ namespace ImageDpiCheckerApp
         {
            
             string cmd = "explorer.exe";
-            string ShowFolder = Convert.ToString(selectedFolder.Text) + "\\" + Convert.ToString(dpiDataGrid[e.ColumnIndex, e.RowIndex].Value);
+            string showFile = Convert.ToString(selectedFolder.Text) + "\\" + Convert.ToString(dpiDataGrid[e.ColumnIndex, e.RowIndex].Value);
                        
            // Console.WriteLine(folder);
             if (e.ColumnIndex == 0)
             {
-                Process.Start(cmd, ShowFolder);
+                Process.Start(cmd, ShowFile);
             }
         }
 
+       /// <summary>
+       /// Als we handmatig een path invoeren dan controleren we wel even of de map bestaat
+       /// </summary>
+       /// <param name="sender"></param>
+       /// <param name="e"></param>
         private void selectedFolder_TextChanged(object sender, EventArgs e)
         {
            CheckEnableScanButton();
+        }
+
+        /// <summary>
+        /// Als we dubbelklikken op de getoonde directorie openen we de directory in de explere
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void hrefToFolder_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            string cmd = "explorer.exe";
+            string showFolder = Convert.ToString(selectedFolder.Text); 
+
+            // Console.WriteLine(folder);
+            if (e.ColumnIndex == 0)
+            {
+                Process.Start(cmd, ShowFolder);
+            }
         }
     }
 }

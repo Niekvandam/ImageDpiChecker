@@ -44,20 +44,20 @@
             // 
             // bOpenFolder
             // 
-            this.bOpenFolder.Location = new System.Drawing.Point(12, 9);
+            this.bOpenFolder.Location = new System.Drawing.Point(236, 7);
             this.bOpenFolder.Name = "bOpenFolder";
             this.bOpenFolder.Size = new System.Drawing.Size(75, 23);
             this.bOpenFolder.TabIndex = 0;
-            this.bOpenFolder.Text = "Open Folder";
+            this.bOpenFolder.Text = "Browse";
             this.bOpenFolder.UseVisualStyleBackColor = true;
             this.bOpenFolder.Click += new System.EventHandler(this.bOpenFolder_Click);
             // 
             // selectedFolder
             // 
             this.selectedFolder.AcceptsReturn = true;
-            this.selectedFolder.Location = new System.Drawing.Point(12, 51);
+            this.selectedFolder.Location = new System.Drawing.Point(12, 7);
             this.selectedFolder.Name = "selectedFolder";
-            this.selectedFolder.Size = new System.Drawing.Size(265, 20);
+            this.selectedFolder.Size = new System.Drawing.Size(218, 20);
             this.selectedFolder.TabIndex = 1;
             this.selectedFolder.TextChanged += new System.EventHandler(this.selectedFolder_TextChanged);
             // 
@@ -101,7 +101,7 @@
             // 
             // bScanFolder
             // 
-            this.bScanFolder.Location = new System.Drawing.Point(12, 123);
+            this.bScanFolder.Location = new System.Drawing.Point(12, 118);
             this.bScanFolder.Name = "bScanFolder";
             this.bScanFolder.Size = new System.Drawing.Size(75, 23);
             this.bScanFolder.TabIndex = 5;
@@ -111,7 +111,7 @@
             // 
             // numTargetDPI
             // 
-            this.numTargetDPI.Location = new System.Drawing.Point(325, 51);
+            this.numTargetDPI.Location = new System.Drawing.Point(191, 40);
             this.numTargetDPI.Name = "numTargetDPI";
             this.numTargetDPI.Size = new System.Drawing.Size(120, 20);
             this.numTargetDPI.TabIndex = 6;
@@ -120,7 +120,7 @@
             // targetDPI
             // 
             this.targetDPI.AutoSize = true;
-            this.targetDPI.Location = new System.Drawing.Point(322, 9);
+            this.targetDPI.Location = new System.Drawing.Point(77, 42);
             this.targetDPI.Name = "targetDPI";
             this.targetDPI.Size = new System.Drawing.Size(108, 13);
             this.targetDPI.TabIndex = 7;
@@ -141,6 +141,7 @@
             this.hrefToFolder.Name = "hrefToFolder";
             this.hrefToFolder.Size = new System.Drawing.Size(0, 13);
             this.hrefToFolder.TabIndex = 9;
+            this.hrefToFolder.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.hrefToFolder_MouseDoubleClick);
             // 
             // DpiChecker
             // 
