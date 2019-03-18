@@ -59,16 +59,23 @@ namespace ImageDpiCheckerApp
             dpiDataGrid.Refresh();
             var filteredFiles = new List<Tuple<string, string, string, bool, string>>();
             var allFiles = new List<Tuple<string, string, string, bool, string>>();
-
+            
             foreach (var loopedFiles in ch.GetFilteredFiles(selectedFolder.Text, filters))
             {
                 if (checkDpi)
                 {
-                    if (Int32.TryParse(loopedFiles.Item3, out int convertedDpi))
-                        if (convertedDpi < Convert.ToDouble(numTargetDPI.Value))
+                    if (loopedFiles.Item4)
+                    {
+                        //string x = .ToString(System.Globalization.CultureInfo.InvariantCulture);
+
+                        if (float.TryParse(loopedFiles.Item3, out float convertedDpi))
                         {
-                            filteredFiles.Add(loopedFiles);
+                            if (convertedDpi < Convert.ToDouble(numTargetDPI.Value))
+                            {
+                                filteredFiles.Add(loopedFiles);
+                            }
                         }
+                    }
                 }
                 else
                 {
