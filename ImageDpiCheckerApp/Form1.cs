@@ -18,7 +18,8 @@ namespace ImageDpiCheckerApp
             bScanFolder.Enabled = false;
             numTargetDPI.Maximum = decimal.MaxValue;
             numTargetDPI.Value = 300;
-            labelException.Visible = false;
+            labelScanning.Text = "Niek van Dam - Contentscanner 2019©";
+            labelScanning.Visible = true;
             filterListBox.SetItemChecked(0, true);
         }
 
@@ -59,7 +60,7 @@ namespace ImageDpiCheckerApp
             dpiDataGrid.Refresh();
             var filteredFiles = new List<Tuple<string, string, string, bool, string>>();
             var allFiles = new List<Tuple<string, string, string, bool, string>>();
-            
+
             foreach (var loopedFiles in ch.GetFilteredFiles(selectedFolder.Text, filters))
             {
                 if (checkDpi)
@@ -113,12 +114,13 @@ namespace ImageDpiCheckerApp
         ** Deze staat standaard in het zoekpad dus doen wat dat lekker quick and dirty */
         private void dpiDataGrid_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == 0)
-            {
-                OpenExplorer(Convert.ToString(selectedFolder.Text) + "\\" + Convert.ToString(dpiDataGrid[e.ColumnIndex, e.RowIndex].Value));
-            }
+           
+                OpenExplorer(Convert.ToString(selectedFolder.Text) + "\\" + Convert.ToString(dpiDataGrid[0, e.RowIndex].Value));
+           
         }
 
+      
+     
         private void ignoreDpi_CheckedChanged(object sender, EventArgs e)
         {
             var checkbox = sender as CheckBox;
@@ -139,12 +141,18 @@ namespace ImageDpiCheckerApp
 
         private void bScanFolder_Click(object sender, EventArgs e)
         {
+            labelScanning.Text = "Scanning directory contents. This coud take a while. Please be patient!";
+            labelScanning.Visible = true;
+            labelScanning.Refresh();
             List<string> filters = new List<string>();
             foreach (object itemChecked in filterListBox.CheckedItems)
             {
                 filters.Add(itemChecked.ToString());
             }
             BindDpiDataGrid(filters);
+            labelScanning.Visible = false;
+            labelScanning.Refresh();
+
         }
 
         public void OpenExplorer(string targetPath)
@@ -156,6 +164,36 @@ namespace ImageDpiCheckerApp
         private void hrefToFolder_MouseClick(object sender, MouseEventArgs e)
         {
             OpenExplorer(Convert.ToString(selectedFolder.Text));
+        }
+
+        /// <summary>
+        /// When we press right mousebutton in datagrid there will be a info window if the file is a pdf.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dpiDataGrid_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+
+            if (e.RowIndex > 0 && (Convert.ToString(dpiDataGrid[1, e.RowIndex].Value)).ToLower() == ".pdf")
+            { 
+                if (e.Button == MouseButtons.Right)
+                {
+                    string FileName = "Hmmmm";
+
+                    // if (e.ColumnIndex == 0)
+                    // {
+                    FileName = (Convert.ToString(selectedFolder.Text) + "\\" + Convert.ToString(dpiDataGrid[0, e.RowIndex].Value));
+                    // }
+                    PopupForm popup = new PopupForm(FileName);
+
+                    DialogResult dialogresult = popup.ShowDialog();
+
+
+                    popup.Dispose();
+
+
+                }
+            }
         }
     }
 }

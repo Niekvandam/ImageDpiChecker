@@ -49,3 +49,4 @@ H:\source\repos\imagedpichecker-master\imagedpichecker-master\ImageDpiCheckerApp
 H:\source\repos\imagedpichecker-master\imagedpichecker-master\ImageDpiCheckerApp\obj\Debug\ImageDpiCheckerForm.csproj.CopyComplete
 H:\source\repos\imagedpichecker-master\imagedpichecker-master\ImageDpiCheckerApp\obj\Debug\ImageDpiCheckerApp.exe
 H:\source\repos\imagedpichecker-master\imagedpichecker-master\ImageDpiCheckerApp\obj\Debug\ImageDpiCheckerApp.pdb
+C:\Users\spijk\Documents\GitHub\ImageDpiChecker\ImageDpiCheckerApp\obj\Debug\ImageDpiCheckerApp.popupForm.resources
