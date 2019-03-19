@@ -40,6 +40,7 @@
             this.label_File = new System.Windows.Forms.Label();
             this.textBox_Creation = new System.Windows.Forms.TextBox();
             this.label_Creation = new System.Windows.Forms.Label();
+            this.labelDPI = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // buttonClose
@@ -149,11 +150,24 @@
             this.label_Creation.Text = "Aanmaakdatum";
             this.label_Creation.Click += new System.EventHandler(this.label_Creation_Click);
             // 
+            // labelDPI
+            // 
+            this.labelDPI.AutoSize = true;
+            this.labelDPI.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.labelDPI.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDPI.Location = new System.Drawing.Point(58, 184);
+            this.labelDPI.Name = "labelDPI";
+            this.labelDPI.Size = new System.Drawing.Size(53, 18);
+            this.labelDPI.TabIndex = 12;
+            this.labelDPI.Text = "label1";
+            // 
             // PopupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(364, 216);
+            this.Controls.Add(this.labelDPI);
             this.Controls.Add(this.label_Creation);
             this.Controls.Add(this.textBox_Creation);
             this.Controls.Add(this.label_File);
@@ -188,5 +202,6 @@
         private System.Windows.Forms.Label label_File;
         private System.Windows.Forms.TextBox textBox_Creation;
         private System.Windows.Forms.Label label_Creation;
+        private System.Windows.Forms.Label labelDPI;
     }
 }

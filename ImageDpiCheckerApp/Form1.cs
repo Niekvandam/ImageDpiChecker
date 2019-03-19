@@ -59,7 +59,7 @@ namespace ImageDpiCheckerApp
             dpiDataGrid.Rows.Clear();
             dpiDataGrid.Refresh();
             var filteredFiles = new List<Tuple<string, string, string, bool, string>>();
-            var allFiles = new List<Tuple<string, string, string, bool, string>>();
+           // var allFiles = new List<Tuple<string, string, string, bool, string>>();
 
             foreach (var loopedFiles in ch.GetFilteredFiles(selectedFolder.Text, filters))
             {
@@ -84,12 +84,13 @@ namespace ImageDpiCheckerApp
                 }
             }
             dpiDataGrid.DataSource = filteredFiles;
-            dpiDataGrid.Columns[0].HeaderText = "File Path";
-            dpiDataGrid.Columns[1].HeaderText = "File Extension";
+            dpiDataGrid.Columns[0].HeaderText = "Filename";
+            dpiDataGrid.Columns[1].HeaderText = "Extension";
             dpiDataGrid.Columns[2].HeaderText = "DPI";
-            dpiDataGrid.Columns[3].HeaderText = "Is Image";
+            dpiDataGrid.Columns[3].HeaderText = "Image";
             dpiDataGrid.Columns[4].HeaderText = "Scanner";
             amountFilesFound.Text = String.Format("Found {0} files in :", filteredFiles.Count, selectedFolder.Text);
+
             hrefToFolder.Text = selectedFolder.Text;
         }
 
@@ -114,8 +115,9 @@ namespace ImageDpiCheckerApp
         ** Deze staat standaard in het zoekpad dus doen wat dat lekker quick and dirty */
         private void dpiDataGrid_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-           
+            if (e.RowIndex >= 0) { 
                 OpenExplorer(Convert.ToString(selectedFolder.Text) + "\\" + Convert.ToString(dpiDataGrid[0, e.RowIndex].Value));
+            }
            
         }
 
@@ -184,7 +186,7 @@ namespace ImageDpiCheckerApp
                     // {
                     FileName = (Convert.ToString(selectedFolder.Text) + "\\" + Convert.ToString(dpiDataGrid[0, e.RowIndex].Value));
                     // }
-                    PopupForm popup = new PopupForm(FileName);
+                    PopupForm popup = new PopupForm(FileName,  Convert.ToString(dpiDataGrid[2, e.RowIndex].Value));
 
                     DialogResult dialogresult = popup.ShowDialog();
 

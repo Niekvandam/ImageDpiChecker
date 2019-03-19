@@ -101,6 +101,7 @@ namespace ImageDpiCheckerApp
             bool isPicture = false;
             string filename = FormatFileName(fileLoc);
             string dpiOfPDF = "---";
+            string source = "unknown";
             using (var reader = new PdfReader(fileLoc))
             {
                 PdfDictionary pg = reader.GetPageN(1);
@@ -119,13 +120,14 @@ namespace ImageDpiCheckerApp
                         {
                             PdfNumber width = (PdfNumber)tg.Get(PdfName.WIDTH);
                             PdfNumber height = (PdfNumber)tg.Get(PdfName.HEIGHT);
-                            dpiOfPDF = Convert.ToString(width.FloatValue / pageWidthInInch);
+                            dpiOfPDF = Convert.ToString( Convert.ToInt32((width.FloatValue / pageWidthInInch)+0.5));
                             isPicture = true;
                         }
                     }
                 }
+                source = reader.Info["Producer"];
             }
-            return Tuple.Create(filename, extension, dpiOfPDF, isPicture, "unknown");
+            return Tuple.Create(filename, extension, dpiOfPDF, isPicture, source);
         }
 
         public string FormatFileName(string fileLoc)

@@ -194,10 +194,11 @@ namespace ImageDpiCheckerApp
             // 
             // groupBox2
             // 
+            this.groupBox2.AutoSize = true;
             this.groupBox2.Controls.Add(this.dpiDataGrid);
             this.groupBox2.Location = new System.Drawing.Point(12, 147);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(752, 302);
+            this.groupBox2.Size = new System.Drawing.Size(752, 315);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Results";
@@ -223,6 +224,7 @@ namespace ImageDpiCheckerApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(776, 461);
             this.Controls.Add(this.labelScanning);
             this.Controls.Add(this.hrefToFolder);
