@@ -177,13 +177,13 @@ namespace ImageDpiCheckerApp
         /// <param name="e"></param>
         private void dpiDataGrid_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-
+           
             if (e.RowIndex >= 0 && (Convert.ToString(dpiDataGrid[1, e.RowIndex].Value)).ToLower() == ".pdf")
             { 
                 if (e.Button == MouseButtons.Right)
                 {
                     string FileName = "Hmmmm";
-
+                    
                     // if (e.ColumnIndex == 0)
                     // {
                     FileName = (Convert.ToString(selectedFolder.Text) + "\\" + Convert.ToString(dpiDataGrid[0, e.RowIndex].Value));

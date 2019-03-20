@@ -106,12 +106,6 @@ namespace ImageDpiCheckerApp
             string MaxDim = "";
             using (var reader = new PdfReader(fileLoc));
 
-                /*
-                iTextSharp.text.pdf.parser.PdfImageObject pdfImage = new iTextSharp.text.pdf.parser.PdfImageObject(imgPRStream);
-                System.Drawing.Image img = pdfImage.GetDrawingImage();
-               
-                */
-
             PdfReader pdf = new PdfReader(fileLoc);
            
             //if (obj != null && obj.IsStream())
@@ -149,53 +143,12 @@ namespace ImageDpiCheckerApp
                     isPicture = true;
                 }
             }
-              source = GetPDFFileinfo(pdf, "Producer");
+            source = GetPDFFileinfo(pdf, "Producer");
 
             return Tuple.Create(filename, extension, dpiOfPDF, isPicture, source, RealDpi);
         }
 
-        private static PdfObject FindImageInPDFDictionary(PdfDictionary pg)
-        {
-            PdfDictionary res =
-                (PdfDictionary)PdfReader.GetPdfObject(pg.Get(PdfName.RESOURCES));
 
-
-            PdfDictionary xobj =
-              (PdfDictionary)PdfReader.GetPdfObject(res.Get(PdfName.XOBJECT));
-            if (xobj != null)
-            {
-                foreach (PdfName name in xobj.Keys)
-                {
-
-                    PdfObject obj = xobj.Get(name);
-                    if (obj.IsIndirect())
-                    {
-                        PdfDictionary tg = (PdfDictionary)PdfReader.GetPdfObject(obj);
-
-                        PdfName type =
-                          (PdfName)PdfReader.GetPdfObject(tg.Get(PdfName.SUBTYPE));
-
-                        //image at the root of the pdf
-                        if (PdfName.IMAGE.Equals(type))
-                        {
-                            return obj;
-                        }// image inside a form
-                        else if (PdfName.FORM.Equals(type))
-                        {
-                            return FindImageInPDFDictionary(tg);
-                        } //image inside a group
-                        else if (PdfName.GROUP.Equals(type))
-                        {
-                            return FindImageInPDFDictionary(tg);
-                        }
-
-                    }
-                }
-            }
-
-            return null;
-
-        }
         public string FormatFileName(string fileLoc)
         {
             string filename = fileLoc.Replace(targetDirectory, "");
