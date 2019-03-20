@@ -9,7 +9,7 @@ namespace ImageDpiCheckerApp
     public class ImageChecker
     {
 
-        public List<Tuple<string, string, string, bool, string>> storedFiles = new List<Tuple<string, string, string, bool, string>>();
+        public List<Tuple<string, string, string, bool, string, string>> storedFiles = new List<Tuple<string, string, string, bool, string,string >>();
 
         public string targetDirectory;
 
@@ -17,7 +17,7 @@ namespace ImageDpiCheckerApp
 
         public List<String> filesFound = new List<String>();
 
-        public List<Tuple<string, string, string, bool, string>> GetFilteredFiles(string directoryToScan, List<string> filters)
+        public List<Tuple<string, string, string, bool, string, string >> GetFilteredFiles(string directoryToScan, List<string> filters)
         {
             targetDirectory = directoryToScan;
 
@@ -27,14 +27,14 @@ namespace ImageDpiCheckerApp
         }
 
 
-        public List<Tuple<string, string, string, bool, string>> LoopThroughFiles(List<string> filteredFiles)
+        public List<Tuple<string, string, string, bool, string, string>> LoopThroughFiles(List<string> filteredFiles)
         {
             bool hasException = false;
             foreach (var fileLoc in filteredFiles)
             {
                 try
                 {
-                    Tuple<string, string, string, bool, string> currentImage = null;
+                    Tuple<string, string, string, bool, string, string > currentImage = null;
                     string filename = Path.GetFileName(fileLoc);
                     string extension = Path.GetExtension(fileLoc);
                     currentImage = extension == ".pdf" ? GetDPIFromPdf(fileLoc, extension) : GetDPIFromImage(fileLoc, extension);
@@ -89,47 +89,113 @@ namespace ImageDpiCheckerApp
 
         }
 
-        public Tuple<string, string, string, bool, string> GetDPIFromImage(string fileLoc, string extension)
+        public Tuple<string, string, string, bool, string, string> GetDPIFromImage(string fileLoc, string extension)
         {
             string filename = FormatFileName(fileLoc);
 
-            return Tuple.Create(filename, extension, Bitmap.FromFile(fileLoc).HorizontalResolution.ToString(), true, "unknown");
+            return Tuple.Create(filename, extension, Bitmap.FromFile(fileLoc).HorizontalResolution.ToString(), true, "unknown", "unknown");
         }
-
-        public Tuple<string, string, string, bool, string> GetDPIFromPdf(string fileLoc, string extension)
+        
+        public Tuple<string, string, string, bool, string, string> GetDPIFromPdf(string fileLoc, string extension)
         {
             bool isPicture = false;
             string filename = FormatFileName(fileLoc);
-            string dpiOfPDF = "---";
+            string dpiOfPDF = "0";
+            string RealDpi = "---";
             string source = "unknown";
-            using (var reader = new PdfReader(fileLoc))
+            string MaxDim = "";
+            using (var reader = new PdfReader(fileLoc));
+
+                /*
+                iTextSharp.text.pdf.parser.PdfImageObject pdfImage = new iTextSharp.text.pdf.parser.PdfImageObject(imgPRStream);
+                System.Drawing.Image img = pdfImage.GetDrawingImage();
+               
+                */
+
+            PdfReader pdf = new PdfReader(fileLoc);
+           
+            //if (obj != null && obj.IsStream())
+            int xo = pdf.XrefSize;
+            int imgCounter = 0;
+            
+            for (int i = 0; i < xo; i++)
             {
-                PdfDictionary pg = reader.GetPageN(1);
-                PdfDictionary res = (PdfDictionary)PdfReader.GetPdfObject(pg.Get(PdfName.RESOURCES));
-                PdfDictionary xobjs = (PdfDictionary)PdfReader.GetPdfObject(res.Get(PdfName.XOBJECT));
-                iTextSharp.text.Rectangle cropbox = reader.GetCropBox(1);
-                var pageWidthInInch = cropbox.Width / 72;
-                if (xobjs != null)
+                
+                PdfObject obj = pdf.GetPdfObject(i);
+                if (obj != null && obj.IsStream())
                 {
-                    foreach (PdfName xObjectKey in xobjs.Keys)
+                    iTextSharp.text.Rectangle cropbox = pdf.GetCropBox(1);
+                    
+                    var pageWidthInInch = cropbox.Width / 72;
+                    PdfDictionary pd = (PdfDictionary)obj;
+                    if (pd.Contains(PdfName.SUBTYPE) && pd.Get(PdfName.SUBTYPE).ToString() == "/Image")
                     {
-                        PdfObject xobj = xobjs.Get(xObjectKey);
-                        PdfDictionary tg = (PdfDictionary)PdfReader.GetPdfObject(xobj);
-                        PdfName subtype = (PdfName)PdfReader.GetPdfObject(tg.Get(PdfName.SUBTYPE));
-                        if (subtype.Equals(PdfName.IMAGE))
-                        {
-                            PdfNumber width = (PdfNumber)tg.Get(PdfName.WIDTH);
-                            PdfNumber height = (PdfNumber)tg.Get(PdfName.HEIGHT);
-                            dpiOfPDF = Convert.ToString( Convert.ToInt32((width.FloatValue / pageWidthInInch)+0.5));
-                            isPicture = true;
+                        imgCounter++;
+                        string filter = pd.Get(PdfName.FILTER).ToString();
+                        string width = pd.Get(PdfName.WIDTH).ToString();
+                        string height = pd.Get(PdfName.HEIGHT).ToString();
+                        string bpp = "1";
+                        float ThisDpi = Convert.ToInt32(width) / pageWidthInInch;
+
+                        if (ThisDpi > Convert.ToDouble(dpiOfPDF)) {
+                            dpiOfPDF = Convert.ToString(Convert.ToInt32(ThisDpi));
+                            bpp = pd.Get(PdfName.BITSPERCOMPONENT).ToString();
+                            MaxDim = width + " x " + height;
                         }
+                        isPicture = true;
+
+                        RealDpi = "Max:"+ MaxDim+ " )(bpp" + bpp + " )(images enclosed:"+Convert.ToString(imgCounter)+ " )(pages:" + Convert.ToString(pdf.NumberOfPages) + ")";
                     }
+                    isPicture = true;
                 }
-                source = reader.Info["Producer"];
             }
-            return Tuple.Create(filename, extension, dpiOfPDF, isPicture, source);
+              source = GetPDFFileinfo(pdf, "Producer");
+
+            return Tuple.Create(filename, extension, dpiOfPDF, isPicture, source, RealDpi);
         }
 
+        private static PdfObject FindImageInPDFDictionary(PdfDictionary pg)
+        {
+            PdfDictionary res =
+                (PdfDictionary)PdfReader.GetPdfObject(pg.Get(PdfName.RESOURCES));
+
+
+            PdfDictionary xobj =
+              (PdfDictionary)PdfReader.GetPdfObject(res.Get(PdfName.XOBJECT));
+            if (xobj != null)
+            {
+                foreach (PdfName name in xobj.Keys)
+                {
+
+                    PdfObject obj = xobj.Get(name);
+                    if (obj.IsIndirect())
+                    {
+                        PdfDictionary tg = (PdfDictionary)PdfReader.GetPdfObject(obj);
+
+                        PdfName type =
+                          (PdfName)PdfReader.GetPdfObject(tg.Get(PdfName.SUBTYPE));
+
+                        //image at the root of the pdf
+                        if (PdfName.IMAGE.Equals(type))
+                        {
+                            return obj;
+                        }// image inside a form
+                        else if (PdfName.FORM.Equals(type))
+                        {
+                            return FindImageInPDFDictionary(tg);
+                        } //image inside a group
+                        else if (PdfName.GROUP.Equals(type))
+                        {
+                            return FindImageInPDFDictionary(tg);
+                        }
+
+                    }
+                }
+            }
+
+            return null;
+
+        }
         public string FormatFileName(string fileLoc)
         {
             string filename = fileLoc.Replace(targetDirectory, "");
@@ -138,6 +204,23 @@ namespace ImageDpiCheckerApp
             return filename;
         }
 
+        public string GetPDFFileinfo(PdfReader reader, string item)
+        {
+            string strValue = "unknown";
+            //PdfReader reader = new PdfReader(FilePath);
+            try
+            {
+                strValue=reader.Info[item];
+                //reader.Info[item];
+            }
+            catch (System.Exception e) {
+                return strValue;
+            }
+
+            return strValue;
+        }
     }
+
+    
 
 }

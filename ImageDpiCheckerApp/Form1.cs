@@ -58,7 +58,7 @@ namespace ImageDpiCheckerApp
             dpiDataGrid.DataSource = null;
             dpiDataGrid.Rows.Clear();
             dpiDataGrid.Refresh();
-            var filteredFiles = new List<Tuple<string, string, string, bool, string>>();
+            var filteredFiles = new List<Tuple<string, string, string, bool, string, string>>();
            // var allFiles = new List<Tuple<string, string, string, bool, string>>();
 
             foreach (var loopedFiles in ch.GetFilteredFiles(selectedFolder.Text, filters))
@@ -89,6 +89,7 @@ namespace ImageDpiCheckerApp
             dpiDataGrid.Columns[2].HeaderText = "DPI";
             dpiDataGrid.Columns[3].HeaderText = "Image";
             dpiDataGrid.Columns[4].HeaderText = "Scanner";
+            dpiDataGrid.Columns[5].HeaderText = "RealDpi";
             amountFilesFound.Text = String.Format("Found {0} files in :", filteredFiles.Count, selectedFolder.Text);
 
             hrefToFolder.Text = selectedFolder.Text;
@@ -160,7 +161,8 @@ namespace ImageDpiCheckerApp
         public void OpenExplorer(string targetPath)
         {
             string cmd = "explorer.exe";
-            Process.Start(cmd, targetPath);
+            string filePath = "\"" + targetPath + "\"";
+            Process.Start(cmd, filePath);
         }
 
         private void hrefToFolder_MouseClick(object sender, MouseEventArgs e)
@@ -176,7 +178,7 @@ namespace ImageDpiCheckerApp
         private void dpiDataGrid_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
 
-            if (e.RowIndex > 0 && (Convert.ToString(dpiDataGrid[1, e.RowIndex].Value)).ToLower() == ".pdf")
+            if (e.RowIndex >= 0 && (Convert.ToString(dpiDataGrid[1, e.RowIndex].Value)).ToLower() == ".pdf")
             { 
                 if (e.Button == MouseButtons.Right)
                 {

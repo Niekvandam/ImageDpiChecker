@@ -25,12 +25,12 @@ namespace ImageDpiCheckerApp
             {
                 PdfReader reader = new PdfReader(file);
                 labelDPI.Text = dpi;
-                textBox_Maker.Text = reader.Info["Creator"];
+                textBox_Maker.Text = GetPDFFileinfo(reader, "Creator");
                 textBox_Versie.Text = "1."+reader.PdfVersion.ToString();
-                textBox_Producent.Text = reader.Info["Producer"];
-                textBox_Creation.Text = DateTime.ParseExact(reader.Info["CreationDate"], "dd-MM-yyy HH:mm:ss", CultureInfo.InvariantCulture).ToString();
-                textBox_Creation.Text = reader.Info["CreationDate"];
-                textBox_Auteur.Text = reader.Info["Author"];
+                textBox_Producent.Text = GetPDFFileinfo(reader, "Producer");
+                //textBox_Creation.Text = DateTime.ParseExact(reader.Info["CreationDate"], "dd-MM-yyy HH:mm:ss", CultureInfo.InvariantCulture).ToString();
+                textBox_Creation.Text = GetPDFFileinfo(reader, "CreationDate");
+                textBox_Auteur.Text = GetPDFFileinfo(reader, "Author");
 
                
             }
@@ -40,6 +40,8 @@ namespace ImageDpiCheckerApp
            //reader.close();
 
         }
+
+    
 
         private void label4_Click(object sender, EventArgs e)
         {
@@ -56,5 +58,23 @@ namespace ImageDpiCheckerApp
         {
 
         }
+
+        public string GetPDFFileinfo(PdfReader reader, string item)
+        {
+            string strValue = "unknown";
+            //PdfReader reader = new PdfReader(filePath);
+            try
+            {
+                strValue = reader.Info[item];
+                //reader.Info[item];
+            }
+            catch (System.Exception e)
+            {
+                return strValue;
+            }
+
+            return strValue;
+        }
     }
 }
+
