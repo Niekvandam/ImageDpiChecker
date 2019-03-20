@@ -182,6 +182,7 @@ namespace ImageDpiCheckerApp
             { 
                 if (e.Button == MouseButtons.Right)
                 {
+                    dpiDataGrid.CurrentCell = dpiDataGrid.Rows[e.RowIndex].Cells[e.ColumnIndex];
                     string FileName = "Hmmmm";
                     
                     // if (e.ColumnIndex == 0)
