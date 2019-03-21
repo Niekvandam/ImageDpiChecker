@@ -205,6 +205,7 @@
             this.Controls.Add(this.buttonClose);
             this.Name = "PopupForm";
             this.Text = "Fileinfo";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.PopupForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

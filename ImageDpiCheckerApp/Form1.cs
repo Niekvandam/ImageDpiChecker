@@ -107,6 +107,10 @@ namespace ImageDpiCheckerApp
         private void selectedFolder_TextChanged(object sender, EventArgs e)
         {
             CheckEnableScanButton();
+            if (e.Button == Enter) {
+                bScanFolder_Click(sender, e);
+            }
+                
         }
 
         /* Als we dubbelklikken op een geselecteerde regel dan openen we dat bestand met behulp van het gekoppelde programma.
@@ -114,8 +118,9 @@ namespace ImageDpiCheckerApp
         ** Deze staat standaard in het zoekpad dus doen wat dat lekker quick and dirty */
         private void dpiDataGrid_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0) { 
-                OpenExplorer(Convert.ToString(selectedFolder.Text) + "\\" + Convert.ToString(dpiDataGrid[0, e.RowIndex].Value));
+            if (e.RowIndex >= 0) {
+                // OpenExplorer(Convert.ToString(selectedFolder.Text) + "\\" + Convert.ToString(dpiDataGrid[0, e.RowIndex].Value));
+                OpenExplorer(Convert.ToString(dpiDataGrid[0, e.RowIndex].Value))
             }
            
         }
@@ -176,7 +181,7 @@ namespace ImageDpiCheckerApp
         private void dpiDataGrid_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
            
-            if (e.RowIndex >= 0 && (Convert.ToString(dpiDataGrid[1, e.RowIndex].Value)).ToLower() == ".pdf")
+            if (e.RowIndex >= 0 && Convert.ToString(dpiDataGrid[2, e.RowIndex].Value).ToLower() == ".pdf")
             { 
                 if (e.Button == MouseButtons.Right)
                 {
@@ -185,9 +190,9 @@ namespace ImageDpiCheckerApp
                     
                     // if (e.ColumnIndex == 0)
                     // {
-                    FileName = (Convert.ToString(selectedFolder.Text) + "\\" + Convert.ToString(dpiDataGrid[0, e.RowIndex].Value));
+                    FileName = (Convert.ToString(selectedFolder.Text) + "\\" + Convert.ToString(dpiDataGrid[1, e.RowIndex].Value));
                     // }
-                    PopupForm popup = new PopupForm(FileName,  Convert.ToString(dpiDataGrid[2, e.RowIndex].Value));
+                    PopupForm popup = new PopupForm(FileName,  Convert.ToString(dpiDataGrid[3, e.RowIndex].Value));
 
                     DialogResult dialogresult = popup.ShowDialog();
 
@@ -197,6 +202,11 @@ namespace ImageDpiCheckerApp
 
                 }
             }
+        }
+
+        private void DpiChecker_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

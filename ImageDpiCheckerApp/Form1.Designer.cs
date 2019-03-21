@@ -30,6 +30,7 @@ namespace ImageDpiCheckerApp
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DpiChecker));
             this.bOpenFolder = new System.Windows.Forms.Button();
             this.selectedFolder = new System.Windows.Forms.TextBox();
             this.filterListBox = new System.Windows.Forms.CheckedListBox();
@@ -102,11 +103,13 @@ namespace ImageDpiCheckerApp
             this.dpiDataGrid.AllowUserToDeleteRows = false;
             this.dpiDataGrid.AllowUserToResizeRows = false;
             this.dpiDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dpiDataGrid.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dpiDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dpiDataGrid.Location = new System.Drawing.Point(9, 19);
+            this.dpiDataGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dpiDataGrid.Location = new System.Drawing.Point(3, 16);
             this.dpiDataGrid.Name = "dpiDataGrid";
             this.dpiDataGrid.ReadOnly = true;
-            this.dpiDataGrid.Size = new System.Drawing.Size(737, 277);
+            this.dpiDataGrid.Size = new System.Drawing.Size(755, 296);
             this.dpiDataGrid.TabIndex = 4;
             this.dpiDataGrid.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dpiDataGrid_CellContentDoubleClick);
             this.dpiDataGrid.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dpiDataGrid_CellMouseDown);
@@ -140,16 +143,18 @@ namespace ImageDpiCheckerApp
             // 
             // amountFilesFound
             // 
+            this.amountFilesFound.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.amountFilesFound.AutoSize = true;
-            this.amountFilesFound.Location = new System.Drawing.Point(154, 128);
+            this.amountFilesFound.Location = new System.Drawing.Point(18, 465);
             this.amountFilesFound.Name = "amountFilesFound";
             this.amountFilesFound.Size = new System.Drawing.Size(0, 13);
             this.amountFilesFound.TabIndex = 8;
             // 
             // hrefToFolder
             // 
+            this.hrefToFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.hrefToFolder.AutoSize = true;
-            this.hrefToFolder.Location = new System.Drawing.Point(264, 128);
+            this.hrefToFolder.Location = new System.Drawing.Point(128, 465);
             this.hrefToFolder.Name = "hrefToFolder";
             this.hrefToFolder.Size = new System.Drawing.Size(0, 13);
             this.hrefToFolder.TabIndex = 9;
@@ -194,11 +199,14 @@ namespace ImageDpiCheckerApp
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.AutoSize = true;
             this.groupBox2.Controls.Add(this.dpiDataGrid);
             this.groupBox2.Location = new System.Drawing.Point(12, 147);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(752, 315);
+            this.groupBox2.Size = new System.Drawing.Size(761, 315);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Results";
@@ -225,16 +233,20 @@ namespace ImageDpiCheckerApp
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(776, 461);
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(776, 486);
             this.Controls.Add(this.labelScanning);
             this.Controls.Add(this.hrefToFolder);
             this.Controls.Add(this.amountFilesFound);
             this.Controls.Add(this.bScanFolder);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DpiChecker";
-            this.Text = "DpiChecker";
+            this.Text = "Gemeente Veere Image DPI check tool";
+            this.Load += new System.EventHandler(this.DpiChecker_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dpiDataGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTargetDPI)).EndInit();
             this.groupBox1.ResumeLayout(false);
