@@ -68,11 +68,11 @@ namespace ImageDpiCheckerApp
             {
                 if (checkDpi)
                 {
-                    if (loopedFiles.isImage)
+                    if (loopedFiles.IsImage)
                     {
                         //string x = .ToString(System.Globalization.CultureInfo.InvariantCulture);
 
-                        if (float.TryParse(loopedFiles.dpi, out float convertedDpi))
+                        if (float.TryParse(loopedFiles.Dpi, out float convertedDpi))
                         {
                             if (convertedDpi < Convert.ToDouble(numTargetDPI.Value))
                             {
