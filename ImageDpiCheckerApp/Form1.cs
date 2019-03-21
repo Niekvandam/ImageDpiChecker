@@ -99,6 +99,14 @@ namespace ImageDpiCheckerApp
         }
 
 
+        private void selectedFolder_KeyDown(object sender, KeyEventArgs e)
+        {
+
+           if (e.KeyCode == Keys.Enter) {
+               bScanFolder_Click(sender, new EventArgs());
+           }
+        }
+
         /// <summary>
         /// Als we handmatig een path invoeren dan controleren we wel even of de map bestaat
         /// </summary>
@@ -107,9 +115,10 @@ namespace ImageDpiCheckerApp
         private void selectedFolder_TextChanged(object sender, EventArgs e)
         {
             CheckEnableScanButton();
-            if (e.Button == Enter) {
-                bScanFolder_Click(sender, e);
-            }
+            //if (e.KeyCode == Keys.Enter) {
+            //    bScanFolder_Click(sender, new EventArgs());
+                
+            //}
                 
         }
 
@@ -120,7 +129,7 @@ namespace ImageDpiCheckerApp
         {
             if (e.RowIndex >= 0) {
                 // OpenExplorer(Convert.ToString(selectedFolder.Text) + "\\" + Convert.ToString(dpiDataGrid[0, e.RowIndex].Value));
-                OpenExplorer(Convert.ToString(dpiDataGrid[0, e.RowIndex].Value))
+                OpenExplorer(Convert.ToString(dpiDataGrid[0, e.RowIndex].Value));
             }
            
         }
@@ -208,5 +217,7 @@ namespace ImageDpiCheckerApp
         {
 
         }
+
+      
     }
 }

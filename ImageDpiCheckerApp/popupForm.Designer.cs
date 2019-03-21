@@ -197,12 +197,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(373, 220);
             this.Controls.Add(this.label_File);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.labelDPI);
             this.Controls.Add(this.buttonClose);
+            this.MaximizeBox = false;
             this.Name = "PopupForm";
             this.Text = "Fileinfo";
             this.TopMost = true;
