@@ -110,6 +110,7 @@ namespace ImageDpiCheckerApp
             this.dpiDataGrid.TabIndex = 4;
             this.dpiDataGrid.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dpiDataGrid_CellContentDoubleClick);
             this.dpiDataGrid.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dpiDataGrid_CellMouseDown);
+            this.dpiDataGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dpiDataGrid_ColumnHeaderMouseClick);
             // 
             // bScanFolder
             // 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -199,6 +200,35 @@ namespace ImageDpiCheckerApp
 
                 }
             }
+        }
+
+        private void dpiDataGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            var dataSource  = (List < Tuple<string, string, string, bool, string, string> > )dpiDataGrid.DataSource;
+            switch (e.ColumnIndex) {
+                case 0:
+                    dataSource.OrderBy(_ => _.Item1);
+                    break;
+                case 1:
+                    dataSource.OrderBy(_ => _.Item2);
+                     break;
+                case 2:
+                    dataSource.OrderBy(_ => _.Item3);
+                    break;
+                case 3:
+                    dataSource.OrderBy(_ => _.Item4);
+                     break;
+                case 4:
+                    dataSource.OrderBy(_ => _.Item5);
+                     break;
+                case 5:
+                    dataSource.OrderBy(_ => _.Item6);
+                     break;
+            }
+            dpiDataGrid.DataSource = dataSource;
+            dpiDataGrid.Rows.Clear();
+            dpiDataGrid.Refresh();
+
         }
     }
 }
