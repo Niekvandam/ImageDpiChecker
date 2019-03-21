@@ -46,6 +46,15 @@ namespace ImageDpiCheckerApp
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.labelScanning = new System.Windows.Forms.Label();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.path = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.extension = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dpi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastEdited = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fileSize = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.isImage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.realDpi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.scanner = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dpiDataGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTargetDPI)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -103,6 +112,16 @@ namespace ImageDpiCheckerApp
             this.dpiDataGrid.AllowUserToResizeRows = false;
             this.dpiDataGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dpiDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dpiDataGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.path,
+            this.name,
+            this.extension,
+            this.dpi,
+            this.lastEdited,
+            this.fileSize,
+            this.isImage,
+            this.realDpi,
+            this.scanner});
             this.dpiDataGrid.Location = new System.Drawing.Point(9, 19);
             this.dpiDataGrid.Name = "dpiDataGrid";
             this.dpiDataGrid.ReadOnly = true;
@@ -110,7 +129,6 @@ namespace ImageDpiCheckerApp
             this.dpiDataGrid.TabIndex = 4;
             this.dpiDataGrid.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dpiDataGrid_CellContentDoubleClick);
             this.dpiDataGrid.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dpiDataGrid_CellMouseDown);
-            this.dpiDataGrid.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dpiDataGrid_ColumnHeaderMouseClick);
             // 
             // bScanFolder
             // 
@@ -221,6 +239,69 @@ namespace ImageDpiCheckerApp
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
             // 
+            // path
+            // 
+            this.path.HeaderText = "Path";
+            this.path.Name = "path";
+            this.path.ReadOnly = true;
+            this.path.Width = 54;
+            // 
+            // name
+            // 
+            this.name.HeaderText = "Name";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.Width = 60;
+            // 
+            // extension
+            // 
+            this.extension.HeaderText = "Extension";
+            this.extension.Name = "extension";
+            this.extension.ReadOnly = true;
+            this.extension.Width = 78;
+            // 
+            // dpi
+            // 
+            this.dpi.HeaderText = "Dpi";
+            this.dpi.Name = "dpi";
+            this.dpi.ReadOnly = true;
+            this.dpi.Width = 48;
+            // 
+            // lastEdited
+            // 
+            this.lastEdited.HeaderText = "Last Edited";
+            this.lastEdited.Name = "lastEdited";
+            this.lastEdited.ReadOnly = true;
+            this.lastEdited.Width = 85;
+            // 
+            // fileSize
+            // 
+            this.fileSize.HeaderText = "File size";
+            this.fileSize.Name = "fileSize";
+            this.fileSize.ReadOnly = true;
+            this.fileSize.Width = 69;
+            // 
+            // isImage
+            // 
+            this.isImage.HeaderText = "Is Image";
+            this.isImage.Name = "isImage";
+            this.isImage.ReadOnly = true;
+            this.isImage.Width = 72;
+            // 
+            // realDpi
+            // 
+            this.realDpi.HeaderText = "Real Dpi";
+            this.realDpi.Name = "realDpi";
+            this.realDpi.ReadOnly = true;
+            this.realDpi.Width = 73;
+            // 
+            // scanner
+            // 
+            this.scanner.HeaderText = "Scanner";
+            this.scanner.Name = "scanner";
+            this.scanner.ReadOnly = true;
+            this.scanner.Width = 72;
+            // 
             // DpiChecker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -267,6 +348,15 @@ namespace ImageDpiCheckerApp
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label labelScanning;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn path;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn extension;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dpi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastEdited;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fileSize;
+        private System.Windows.Forms.DataGridViewTextBoxColumn isImage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn realDpi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn scanner;
     }
 }
 
