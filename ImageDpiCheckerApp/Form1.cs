@@ -70,8 +70,6 @@ namespace ImageDpiCheckerApp
                 {
                     if (loopedFiles.IsImage)
                     {
-                        //string x = .ToString(System.Globalization.CultureInfo.InvariantCulture);
-
                         if (float.TryParse(loopedFiles.Dpi, out float convertedDpi))
                         {
                             if (convertedDpi < Convert.ToDouble(numTargetDPI.Value))
@@ -128,7 +126,6 @@ namespace ImageDpiCheckerApp
         private void dpiDataGrid_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0) {
-                // OpenExplorer(Convert.ToString(selectedFolder.Text) + "\\" + Convert.ToString(dpiDataGrid[0, e.RowIndex].Value));
                 OpenExplorer(Convert.ToString(dpiDataGrid[0, e.RowIndex].Value));
             }
            

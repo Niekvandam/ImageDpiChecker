@@ -22,7 +22,7 @@ namespace ImageDpiCheckerApp
             this.Extension = extension;
             this.Dpi = dpi;
             this.LastEdited = lastEdited;
-            this.FileSize = fileSize;
+            this.FileSize = fileSize/1024;
             this.IsImage = isImage;
             this.RealDpi = realDpi;
             this.Scanner = scanner;
