@@ -9,7 +9,7 @@ namespace ImageDpiCheckerApp
     public class ImageChecker
     {
 
-        public List<Tuple<string, string, string, bool, string, string>> storedFiles = new List<Tuple<string, string, string, bool, string,string >>();
+        public List<ScannedFile> storedFiles = new List<ScannedFile>();
 
         public string targetDirectory;
 
@@ -17,7 +17,7 @@ namespace ImageDpiCheckerApp
 
         public List<String> filesFound = new List<String>();
 
-        public List<Tuple<string, string, string, bool, string, string >> GetFilteredFiles(string directoryToScan, List<string> filters)
+        public List<ScannedFile> GetFilteredFiles(string directoryToScan, List<string> filters)
         {
             targetDirectory = directoryToScan;
 
@@ -27,14 +27,14 @@ namespace ImageDpiCheckerApp
         }
 
 
-        public List<Tuple<string, string, string, bool, string, string>> LoopThroughFiles(List<string> filteredFiles)
+        public List<ScannedFile> LoopThroughFiles(List<string> filteredFiles)
         {
             bool hasException = false;
             foreach (var fileLoc in filteredFiles)
             {
                 try
                 {
-                    Tuple<string, string, string, bool, string, string > currentImage = null;
+                    ScannedFile currentImage = null;
                     string filename = Path.GetFileName(fileLoc);
                     string extension = Path.GetExtension(fileLoc);
                     currentImage = extension == ".pdf" ? GetDPIFromPdf(fileLoc, extension) : GetDPIFromImage(fileLoc, extension);
@@ -89,23 +89,21 @@ namespace ImageDpiCheckerApp
 
         }
 
-        public Tuple<string, string, string, bool, string, string> GetDPIFromImage(string fileLoc, string extension)
+        public ScannedFile GetDPIFromImage(string fileLoc, string extension)
         {
+            long length = new FileInfo(fileLoc).Length;
             string filename = FormatFileName(fileLoc);
-
-            return Tuple.Create(filename, extension, Bitmap.FromFile(fileLoc).HorizontalResolution.ToString(), true, "unknown", "unknown");
+            return new ScannedFile(fileLoc, Path.GetFileName(fileLoc), Path.GetExtension(fileLoc), Bitmap.FromFile(fileLoc).HorizontalResolution.ToString(), File.GetLastWriteTime(fileLoc), length, true);
         }
         
-        public Tuple<string, string, string, bool, string, string> GetDPIFromPdf(string fileLoc, string extension)
+        public ScannedFile GetDPIFromPdf(string fileLoc, string extension)
         {
             bool isPicture = false;
             string filename = FormatFileName(fileLoc);
             string dpiOfPDF = "0";
-            string RealDpi = "---";
+            string realDpi = "---";
             string source = "unknown";
             string MaxDim = "";
-            using (var reader = new PdfReader(fileLoc));
-
             PdfReader pdf = new PdfReader(fileLoc);
            
             //if (obj != null && obj.IsStream())
@@ -138,14 +136,14 @@ namespace ImageDpiCheckerApp
                         }
                         isPicture = true;
 
-                        RealDpi = "Max:"+ MaxDim+ " )(bpp" + bpp + " )(images enclosed:"+Convert.ToString(imgCounter)+ " )(pages:" + Convert.ToString(pdf.NumberOfPages) + ")";
+                        realDpi = "Max:"+ MaxDim+ " )(bpp" + bpp + " )(images enclosed:"+Convert.ToString(imgCounter)+ " )(pages:" + Convert.ToString(pdf.NumberOfPages) + ")";
                     }
                     isPicture = true;
                 }
             }
+            long length = new FileInfo(fileLoc).Length;
             source = GetPDFFileinfo(pdf, "Producer");
-
-            return Tuple.Create(filename, extension, dpiOfPDF, isPicture, source, RealDpi);
+            return new ScannedFile(fileLoc, Path.GetFileName(fileLoc), Path.GetExtension(fileLoc), dpiOfPDF, File.GetLastWriteTime(fileLoc), length, isPicture, realDpi, source);
         }
 
 

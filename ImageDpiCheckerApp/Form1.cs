@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,6 +23,7 @@ namespace ImageDpiCheckerApp
             labelScanning.Text = "Niek van Dam - Contentscanner 2019©";
             labelScanning.Visible = true;
             filterListBox.SetItemChecked(0, true);
+            dpiDataGrid.AutoGenerateColumns = true;
         }
 
         private void bOpenFolder_Click(object sender, EventArgs e)
@@ -58,18 +61,18 @@ namespace ImageDpiCheckerApp
             dpiDataGrid.DataSource = null;
             dpiDataGrid.Rows.Clear();
             dpiDataGrid.Refresh();
-            var filteredFiles = new List<Tuple<string, string, string, bool, string, string>>();
+            var filteredFiles = new List<ScannedFile>();
            // var allFiles = new List<Tuple<string, string, string, bool, string>>();
 
             foreach (var loopedFiles in ch.GetFilteredFiles(selectedFolder.Text, filters))
             {
                 if (checkDpi)
                 {
-                    if (loopedFiles.Item4)
+                    if (loopedFiles.IsImage)
                     {
                         //string x = .ToString(System.Globalization.CultureInfo.InvariantCulture);
 
-                        if (float.TryParse(loopedFiles.Item3, out float convertedDpi))
+                        if (float.TryParse(loopedFiles.Dpi, out float convertedDpi))
                         {
                             if (convertedDpi < Convert.ToDouble(numTargetDPI.Value))
                             {
@@ -83,13 +86,8 @@ namespace ImageDpiCheckerApp
                     filteredFiles.Add(loopedFiles);
                 }
             }
-            dpiDataGrid.DataSource = filteredFiles;
-            dpiDataGrid.Columns[0].HeaderText = "Filename";
-            dpiDataGrid.Columns[1].HeaderText = "Extension";
-            dpiDataGrid.Columns[2].HeaderText = "DPI";
-            dpiDataGrid.Columns[3].HeaderText = "Image";
-            dpiDataGrid.Columns[4].HeaderText = "Scanner";
-            dpiDataGrid.Columns[5].HeaderText = "RealDpi";
+            dpiDataGrid.DataSource =  filteredFiles;
+
             amountFilesFound.Text = String.Format("Found {0} files in :", filteredFiles.Count, selectedFolder.Text);
 
             hrefToFolder.Text = selectedFolder.Text;
