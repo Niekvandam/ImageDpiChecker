@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ImageDpiCheckerApp.exe" size="69120">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ImageDpiCheckerApp.exe" size="70144">
       <assemblyIdentity name="ImageDpiCheckerApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>UD/yr40J2nOxyPgLzK85F9TZ/Ze3AQWNTEhyVqjOPpk=</dsig:DigestValue>
+        <dsig:DigestValue>w4gBDgr9FZuFO78k9iabPrlZNLqrNk8y73k1AXVaiME=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

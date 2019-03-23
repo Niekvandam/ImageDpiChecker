@@ -12,6 +12,8 @@ namespace ImageDpiCheckerApp
 {
     public partial class DpiChecker : Form
     {
+        private bool sortDirection;
+        private int previousIndex;
         public bool checkDpi = true;
 
         public DpiChecker()
