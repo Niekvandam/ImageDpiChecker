@@ -93,7 +93,7 @@ namespace ImageDpiCheckerApp
         {
             long length = new FileInfo(fileLoc).Length;
             string filename = FormatFileName(fileLoc);
-            return new ScannedFile(fileLoc, Path.GetFileName(fileLoc), Path.GetExtension(fileLoc), Bitmap.FromFile(fileLoc).HorizontalResolution.ToString(), File.GetLastWriteTime(fileLoc), length, true);
+            return new ScannedFile(fileLoc, Path.GetFileName(fileLoc), Path.GetExtension(fileLoc), Bitmap.FromFile(fileLoc).HorizontalResolution.ToString(),0, File.GetLastWriteTime(fileLoc), length, true);
         }
         
         public ScannedFile GetDPIFromPdf(string fileLoc, string extension)
@@ -104,6 +104,8 @@ namespace ImageDpiCheckerApp
             string realDpi = "---";
             string source = "unknown";
             string MaxDim = "";
+            int bpp = 0;
+              
             PdfReader pdf = new PdfReader(fileLoc);
            
             //if (obj != null && obj.IsStream())
@@ -126,12 +128,11 @@ namespace ImageDpiCheckerApp
                         string filter = pd.Get(PdfName.FILTER).ToString();
                         string width = pd.Get(PdfName.WIDTH).ToString();
                         string height = pd.Get(PdfName.HEIGHT).ToString();
-                        string bpp = "1";
                         float ThisDpi = Convert.ToInt32(width) / pageWidthInInch;
 
                         if (ThisDpi > Convert.ToDouble(dpiOfPDF)) {
                             dpiOfPDF = Convert.ToString(Convert.ToInt32(ThisDpi));
-                            bpp = pd.Get(PdfName.BITSPERCOMPONENT).ToString();
+                            bpp = Convert.ToInt32(pd.Get(PdfName.BITSPERCOMPONENT).ToString());
                             MaxDim = width + " x " + height;
                         }
                         isPicture = true;
@@ -143,7 +144,7 @@ namespace ImageDpiCheckerApp
             }
             long length = new FileInfo(fileLoc).Length;
             source = GetPDFFileinfo(pdf, "Producer");
-            return new ScannedFile(fileLoc, Path.GetFileName(fileLoc), Path.GetExtension(fileLoc), dpiOfPDF, File.GetLastWriteTime(fileLoc), length, isPicture, realDpi, source);
+            return new ScannedFile(fileLoc, Path.GetFileName(fileLoc), Path.GetExtension(fileLoc), dpiOfPDF,bpp, File.GetLastWriteTime(fileLoc), length, isPicture, realDpi, source);
         }
 
 

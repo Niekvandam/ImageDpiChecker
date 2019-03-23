@@ -10,12 +10,13 @@ namespace ImageDpiCheckerApp
         public string Dpi { get; private set; }
         public string RealDpi { get; private set; }
         public string Scanner { get; private set; }
+        public int Bpp { get; private set; }
         public DateTime LastEdited { get; private set; }
         public long FileSize { get; private set; }
         public bool IsImage { get; private set; }
 
 
-        public ScannedFile(string path, string name, string extension, string dpi, DateTime lastEdited, long fileSize, bool isImage, string realDpi = "unknown", string scanner = "unknown")
+        public ScannedFile(string path, string name, string extension, string dpi, int bpp, DateTime lastEdited, long fileSize, bool isImage, string realDpi = "unknown", string scanner = "unknown")
         {
             this.Path = path;
             this.Name = name;
@@ -25,6 +26,7 @@ namespace ImageDpiCheckerApp
             this.FileSize = fileSize/1024;
             this.IsImage = isImage;
             this.RealDpi = realDpi;
+            this.Bpp = bpp;
             this.Scanner = scanner;
         }
 

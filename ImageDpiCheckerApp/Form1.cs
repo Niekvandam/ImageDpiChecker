@@ -97,13 +97,7 @@ namespace ImageDpiCheckerApp
         }
 
 
-        private void selectedFolder_KeyDown(object sender, KeyEventArgs e)
-        {
-
-           if (e.KeyCode == Keys.Enter) {
-               bScanFolder_Click(sender, new EventArgs());
-           }
-        }
+      
 
         /// <summary>
         /// Als we handmatig een path invoeren dan controleren we wel even of de map bestaat
@@ -215,6 +209,14 @@ namespace ImageDpiCheckerApp
 
         }
 
-      
+        private void selectedFolder_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.KeyCode == Keys.Enter && bScanFolder.Enabled)
+            {
+
+                bScanFolder_Click(sender, new EventArgs());
+            }
+        }
     }
 }

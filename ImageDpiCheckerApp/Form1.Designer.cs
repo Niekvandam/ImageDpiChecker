@@ -72,6 +72,7 @@ namespace ImageDpiCheckerApp
             this.selectedFolder.Size = new System.Drawing.Size(347, 20);
             this.selectedFolder.TabIndex = 1;
             this.selectedFolder.TextChanged += new System.EventHandler(this.selectedFolder_TextChanged);
+            this.selectedFolder.KeyDown += new System.Windows.Forms.KeyEventHandler(this.selectedFolder_KeyDown);
             // 
             // filterListBox
             // 
@@ -234,7 +235,6 @@ namespace ImageDpiCheckerApp
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScroll = true;
             this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(776, 486);
             this.Controls.Add(this.labelScanning);
             this.Controls.Add(this.hrefToFolder);
@@ -243,6 +243,7 @@ namespace ImageDpiCheckerApp
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DpiChecker";
             this.Text = "Gemeente Veere Image DPI check tool";
