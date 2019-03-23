@@ -72,13 +72,13 @@ namespace ImageDpiCheckerApp
                 {
                     if (loopedFiles.IsImage)
                     {
-                        if (float.TryParse(loopedFiles.Dpi, out float convertedDpi))
-                        {
-                            if (convertedDpi < Convert.ToDouble(numTargetDPI.Value))
+                       // if (float.TryParse(loopedFiles.Dpi, out float convertedDpi))
+                       // {
+                            if (loopedFiles.Dpi < numTargetDPI.Value)
                             {
                                 filteredFiles.Add(loopedFiles);
                             }
-                        }
+                        //}
                     }
                 }
                 else
@@ -182,7 +182,8 @@ namespace ImageDpiCheckerApp
         /// <param name="e"></param>
         private void dpiDataGrid_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
         {
-           
+            // obsolete
+           /*
             if (e.RowIndex >= 0 && Convert.ToString(dpiDataGrid[2, e.RowIndex].Value).ToLower() == ".pdf")
             { 
                 if (e.Button == MouseButtons.Right)
@@ -203,7 +204,7 @@ namespace ImageDpiCheckerApp
 
 
                 }
-            }
+            }*/
         }
 
         private void DpiChecker_Load(object sender, EventArgs e)

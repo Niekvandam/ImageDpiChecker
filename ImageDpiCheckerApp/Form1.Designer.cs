@@ -76,6 +76,7 @@ namespace ImageDpiCheckerApp
             // 
             // filterListBox
             // 
+            this.filterListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.filterListBox.CheckOnClick = true;
             this.filterListBox.FormattingEnabled = true;
             this.filterListBox.Items.AddRange(new object[] {
@@ -91,6 +92,7 @@ namespace ImageDpiCheckerApp
             // 
             // filterLabel
             // 
+            this.filterLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.filterLabel.AutoSize = true;
             this.filterLabel.Location = new System.Drawing.Point(606, 16);
             this.filterLabel.Name = "filterLabel";
@@ -110,7 +112,7 @@ namespace ImageDpiCheckerApp
             this.dpiDataGrid.Location = new System.Drawing.Point(3, 16);
             this.dpiDataGrid.Name = "dpiDataGrid";
             this.dpiDataGrid.ReadOnly = true;
-            this.dpiDataGrid.Size = new System.Drawing.Size(755, 296);
+            this.dpiDataGrid.Size = new System.Drawing.Size(746, 296);
             this.dpiDataGrid.TabIndex = 4;
             this.dpiDataGrid.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dpiDataGrid_CellContentDoubleClick);
             this.dpiDataGrid.CellMouseDown += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dpiDataGrid_CellMouseDown);
@@ -184,6 +186,8 @@ namespace ImageDpiCheckerApp
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.ignoreDpi);
             this.groupBox1.Controls.Add(this.selectedFolder);
             this.groupBox1.Controls.Add(this.numTargetDPI);
@@ -208,7 +212,7 @@ namespace ImageDpiCheckerApp
             this.groupBox2.Controls.Add(this.dpiDataGrid);
             this.groupBox2.Location = new System.Drawing.Point(12, 147);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(761, 315);
+            this.groupBox2.Size = new System.Drawing.Size(752, 315);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Results";

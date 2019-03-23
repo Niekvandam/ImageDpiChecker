@@ -93,7 +93,7 @@ namespace ImageDpiCheckerApp
         {
             long length = new FileInfo(fileLoc).Length;
             string filename = FormatFileName(fileLoc);
-            return new ScannedFile(fileLoc, Path.GetFileName(fileLoc), Path.GetExtension(fileLoc), Bitmap.FromFile(fileLoc).HorizontalResolution.ToString(),0, File.GetLastWriteTime(fileLoc), length, true);
+            return new ScannedFile(fileLoc, Path.GetFileName(fileLoc), Path.GetExtension(fileLoc),"---", Bitmap.FromFile(fileLoc).HorizontalResolution.ToString(),0,0,1, File.GetLastWriteTime(fileLoc), length, true);
         }
         
         public ScannedFile GetDPIFromPdf(string fileLoc, string extension)
@@ -104,6 +104,8 @@ namespace ImageDpiCheckerApp
             string realDpi = "---";
             string source = "unknown";
             string MaxDim = "";
+            string version = "";
+            string engine = "unknown";
             int bpp = 0;
               
             PdfReader pdf = new PdfReader(fileLoc);
@@ -143,8 +145,10 @@ namespace ImageDpiCheckerApp
                 }
             }
             long length = new FileInfo(fileLoc).Length;
-            source = GetPDFFileinfo(pdf, "Producer");
-            return new ScannedFile(fileLoc, Path.GetFileName(fileLoc), Path.GetExtension(fileLoc), dpiOfPDF,bpp, File.GetLastWriteTime(fileLoc), length, isPicture, realDpi, source);
+            source = GetPDFFileinfo(pdf, "Creator");
+            version = "1." + pdf.PdfVersion.ToString();
+            engine = GetPDFFileinfo(pdf, "Producer");
+            return new ScannedFile(fileLoc, Path.GetFileName(fileLoc), Path.GetExtension(fileLoc), version, dpiOfPDF, pdf.NumberOfPages, bpp,imgCounter, File.GetLastWriteTime(fileLoc), length, isPicture, MaxDim, source, engine);
         }
 
 
