@@ -218,5 +218,23 @@ namespace ImageDpiCheckerApp
                 bScanFolder_Click(sender, new EventArgs());
             }
         }
+
+        public List<ScannedFile> SortData(List<ScannedFile> list, string column, bool ascending)
+        {
+            return ascending ?
+                list.OrderBy(_ => _.GetType().GetProperty(column).GetValue(_)).ToList() :
+                list.OrderByDescending(_ => _.GetType().GetProperty(column).GetValue(_)).ToList();
+        }
+
+        private void dpiDataGrid_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex == previousIndex)
+                sortDirection ^= true;
+
+            dpiDataGrid.DataSource = dpiDataGrid.DataSource = SortData(
+        (List<ScannedFile>)dpiDataGrid.DataSource, dpiDataGrid.Columns[e.ColumnIndex].Name, sortDirection);
+
+            previousIndex = e.ColumnIndex;
+        }
     }
 }
